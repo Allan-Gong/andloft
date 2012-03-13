@@ -1,0 +1,33 @@
+/*  
+Plugin Name: Auto-Post-Images (API)
+Plugin URI: http://www.karthikeyankarunanidhi.com/
+Author: Karthikeyan Karunanidhi
+Copyright Karthikeyan Karunanidhi (email : wordpress [at] karunanidhi DOT com
+*/
+
+.kkautopostimage {
+float:right;
+margin:5px 0px 5px 5px;
+padding:1px;
+border:1px solid #DDD;
+}
+
+.kkautopostimage img {
+padding:3px;
+}
+
+/******* workarounds and hacks *******/
+.clearfix:after {
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+
+.clearfix {display: inline-table;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */

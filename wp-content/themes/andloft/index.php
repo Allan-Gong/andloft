@@ -47,11 +47,11 @@
 	
 		<?php endif; ?>
 		
-		<div class="post copyright">
+<!-- 		<div class="post copyright">
 			<div>
 			   <p>FolioGrid - <a href="http://www.frogsthemes.com">Premium Wordpress Themes</a> by FrogsThemes.com</p>
 			</div>
-		</div>
+		</div> -->
 	
 	</div>
 

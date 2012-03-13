@@ -45,9 +45,13 @@
                 <li class="first"><a href="<?php bloginfo('url'); ?>">Home</a></li>
                 <?php wp_list_pages('title_li=&depth=1'); ?>
             </ul>
-            <p><?php if(get_option('fgp_footer_text')!=''){ echo get_option('fgp_footer_text'); }else{ ?>All work copyright <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); } ?></a></p>
+            <p><?php 
+                if (get_option('fgp_footer_text')!='') { 
+                    echo get_option('fgp_footer_text'); 
+                } else { ?>
+                    All work copyright <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); } ?></a></p>
         </div>
-        <p>FolioGrid - a <a href="http://www.frogsthemes.com">Premium Wordpress Theme</a> by FrogsThemes.com</p>
+        <!-- <p>FolioGrid - a <a href="http://www.frogsthemes.com">Premium Wordpress Theme</a> by FrogsThemes.com</p> -->
 	</div>
 
 
