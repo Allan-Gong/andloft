@@ -1,0 +1,130 @@
+/* Red specific css */
+
+/* Global reset
+-------------------------------------------------------------------*/
+
+	a 							{ color:#3B5998; }
+	a:hover						{ color:#3B5998; } /* Float an element left with a margin */
+	
+	blockquote					{ border-left:3px solid #fff; background:#eee; }
+
+/* Default
+-------------------------------------------------------------------*/
+
+	html, body 					{ color:#333; }	
+	body 						{ background:#f0eeee; text-shadow:#fff 0 1px 0; }
+
+/* Template
+-------------------------------------------------------------------*/
+
+	#header						{ background:#3B5998; -webkit-box-shadow:0 0 10px rgba(0, 0, 0, .2); -moz-box-shadow:0 0 10px rgba(0, 0, 0, .2); }
+
+/* Header
+-------------------------------------------------------------------*/
+
+	#header div					{ color:#e0edfb; }
+	#header a					{ color:#fff; }
+	
+	#header input,
+	#header select 				{ background:#fff; color:#333; }
+	#header input:focus,
+	#header select:focus 		{ background:#fff;color:#333; }
+	
+	#header ul li				{ border-left:1px solid #3B5998; }
+	
+/* Post
+-------------------------------------------------------------------*/
+
+	h1							{ color:#333; border-bottom:3px dotted #333; padding:0 0 20px 0; }
+	h1,
+	h1 a	 					{ color:#333; }
+	h1 a:hover	 				{ color:#3B5998; }
+	
+	#coreContent h2,
+	#coreContent h3,
+	#coreContent h4				{ color:#333; border-top:1px dotted #444; text-shadow:#333 0 2px 1px; }
+
+	.post 						{ background:#fff; }
+	
+	.post:hover					{ -webkit-box-shadow:0 0 10px rgba(0, 0, 0, .3); -moz-box-shadow:0 0 10px rgba(0, 0, 0, .3); text-shadow:#fff 0 1px 0; }
+	.post:active				{ -webkit-box-shadow:0 0 10px rgba(0, 0, 0, .3); -moz-box-shadow:0 0 10px rgba(0, 0, 0, .3); }
+	
+	.post-content h2	 		{ color:#333; }
+	.post-content a	 			{ color:#333; }
+	.post-content a:hover		{ color:#3B5998; }
+	
+	.post-content .bubble		{ padding:0; }
+	
+	.copyright					{ color:#333; }
+	.copyright a				{ color:#3B5998; }
+
+	.singlepost img		 		{ border:1px solid #fff; }
+
+	.archiveTitle				{ background:#fff; }
+	.archiveTitle h2			{ color:#333; }
+	.archiveTitle .currentCat span	{ color:#333; }
+	.archiveTitle h3			{ color:#333; }
+	
+	.pagination					{ border-top:1px dotted #ccc; border-bottom:1px dotted #ccc; }
+	.prevpost a,	
+	.nextpost a					{ background:#eee; }
+	.prevpost a:hover,	
+	.nextpost a:hover			{ background:#3B5998; color:#fff; }
+	
+	#top_link					{ background:url(../../images/arrow.png) no-repeat 9px 9px #e0dee0; color:#fff; }
+	#top_link:hover				{ background:url(../../images/arrow.png) no-repeat 9px 9px #3B5998; }
+	
+	#rss_link					{ background:url(../../images/rss.png) no-repeat 9px 9px #e0dee0; color:#fff; }
+	#rss_link:hover				{ background:url(../../images/rss.png) no-repeat 9px 9px #3B5998; }
+	
+	#searchBox					{ background:url(../../images/search.png) no-repeat 9px 9px #e0dee0; color:#fff; }
+	#searchBox:hover			{ background:url(../../images/search.png) no-repeat 9px 9px #3B5998; }
+
+	
+/* Sidebar elements
+-------------------------------------------------------------------*/	
+	
+	/* Contains the entire tabbed section */
+	.tabbed ul.tabs li a 		{ background:#fff; }
+	.tabbed ul.tabs li a:hover	{ background:#eee; }
+	
+	.tabbed ul.tabs li a.tab-current { background:#eee; }
+	
+	.tabbed div 				{ background:#eee; }
+	
+	.tabbed div ul li 			{ border-bottom:1px dotted #fff; }
+	.tabbed div ul li a 		{ background:#eee; }
+	.tabbed div ul li a:hover 	{ background:#eee; text-decoration:underline; }
+
+/* Footer elements
+-------------------------------------------------------------------*/
+
+	#footer						{ border-top:1px solid #ccc; }
+	#footer a					{ color:#3B5998; }
+	
+	#footer ul li				{ border-left:1px solid #ccc; }
+
+/* Comments
+-------------------------------------------------------------------*/
+
+	#comments h4				{ color:#333; border-top:1px dotted #ccc; text-shadow:#fff 0 1px 1px; }
+	
+	.commentEntry				{ border-top:1px dotted #ccc; border-bottom:1px dotted #ccc; }
+	.avatar						{ background:#fff; border:1px solid #fff; }
+	.commentContent				{ color:#333; }
+	.commentMeta				{ border-top:1px dotted #ccc; }
+	
+	/* Comment form
+	--------------- */
+	
+	.commentForm em				{ color:#333; }
+	
+	input[type=text],
+	textarea					{ border:1px solid #ccc; color:#333; background:#fff; }
+	
+	input:focus,
+	textarea:focus				{ border-color:#333; color:#3B5998; background:#fff; }
+	
+	input[type=submit]			{ color:#fff; background:#3B5998; border:1px solid #3B5998; }
+	input[type=submit]:hover,
+	input[type=submit]:focus	{ background:#3B5998; border-color:#3B5998; }

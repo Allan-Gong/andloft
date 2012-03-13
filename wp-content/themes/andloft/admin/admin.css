@@ -1,0 +1,73 @@
+/* admin options css */
+.ft_wrap										{ width:740px; }
+.ft_section										{ border:1px solid #ddd; border-bottom:0; background:#f9f9f9; }
+.ft_opts										{ margin:20px 0 0 0; }
+.instruction									{ margin:0 0 20px 0; }
+.ft_opts label									{ font-size:12px; font-weight:700; width:200px; display:block; float:left; }
+.ft_input 										{ padding:30px 10px; border-bottom:1px solid #ddd; border-top:1px solid #fff; }
+.ft_opts small									{ display:block; float:right; width:200px; color:#999; }
+.ft_opts input[type="text"], .ft_opts select	{ width:280px; font-size:12px; padding:4px; color:#333; line-height:1em; background:#f3f3f3; }
+.ft_input input:focus, .ft_input textarea:focus	{ background:#fff; }
+.ft_input textarea								{ width:280px; height:175px; font-size:12px; padding:4px; color:#333; line-height:1.5em; background:#f3f3f3; }
+.ft_title h3 									{ cursor:pointer; font-size:1em; text-transform: uppercase; margin:0; font-weight:bold; color:#232323; float:left; 
+												  width:80%; padding:14px 4px; }
+.ft_title										{ cursor:pointer; border-bottom:1px solid #ddd; background:#eee; padding:0; }
+.ft_title h3 img.inactive						{ margin:-8px 10px 0 2px; width:32px; height:32px; background:url('images/pointer.png') no-repeat 0 0; float:left; }
+.ft_title h3 img.active							{ margin:-8px 10px 0 2px; width:32px; height:32px; background:url('images/pointer.png') no-repeat  0 -32px; float:left; }
+.ft_title span.submit							{ display:block; float:right; margin:0; padding:0; width:15%; padding:14px 0; }
+.clearfix										{ clear:both; }
+.ft_table th, .ft_table td						{ border:1px solid #bbb; padding:10px; text-align:center; }
+.ft_table th, .ft_table td.feature				{ border-color:#888; }
+.ft_image										{ width:280px; float:left; }
+.ft_image input									{ margin:0 0 10px 0; }
+.ft_image img									{ margin:10px 0 0 0; }
+
+.frogsThemes									{ width:740px; height:150px; }
+.frogThemesHeader								{ background:url(../images/header.gif) no-repeat; height:65px; }
+.frogThemesFooter								{ background:url(../images/footerFGP.gif) no-repeat; height:85px; }
+.frogThemesLinksRight							{ float:right; width:180px; }
+.frogLogo										{ width:215px; height:65px; display:block; text-indent:-3000em; background:url(../images/frog.gif) no-repeat; float:left; }
+.frogLogo:hover									{ background-position:bottom; }
+.frogFacebook									{ width:180px; height:32px; display:block; text-indent:-3000em; background:url(../images/facebook.gif) no-repeat; }
+.frogFacebook:hover								{ background-position:bottom; }
+.frogTwitter									{ width:180px; height:33px; display:block; text-indent:-3000em; background:url(../images/twitter.gif) no-repeat; }
+.frogTwitter:hover								{ background-position:bottom; }
+.frogThemesSupportLinks							{ float:right; padding:0; margin:3px 0 0 0; list-style:none; }
+.frogThemesSupportLinks li						{ float:left; font-size:11px; margin:0 0 0 7px; }
+.frogThemesSupportLinks li a					{ color:#41aad3; }
+
+/* custom post options css */
+#tabsWrap										{ margin:0 0 0 10px;  }
+#tabs											{ width: 90%; text-align: left; margin: 0 auto; height: 25px; float:left; position:relative; z-index:100; }
+#tabs a 										{ display: block; color: #464646; text-decoration:none; float: left; border:none; padding: 7px 11px; 
+												  margin-right: .4em; background:none; height:13px; font-weight:bold; } 
+#tabs a.active 									{ border: 1px solid #dfdfdf; border-bottom: none; color:#21759b; text-decoration:none; background:#f2f2f2;
+												  -moz-border-radius-topleft: 3px;
+												  -khtml-border-top-left-radius: 3px; -webkit-border-top-left-radius: 3px; border-top-left-radius: 3px;	
+												  -moz-border-radius-topright: 3px; -khtml-border-top-right-radius: 3px; -webkit-border-top-right-radius: 3px;
+												  border-top-right-radius: 3px; padding: 6px 10px; }
+.tab-div 										{ clear:left; width:95%; border:1px solid #dfdfdf; padding:10px; float:left; position:relative; z-index:50; }
+.tabsChoose										{ display:block; float:left; margin:6px 20px 0 5px; }
+span.options1									{ background:url(images/options1.gif) no-repeat; width:182px; height:19px; color:#298cba; font-size:11px; 
+												  display:block; padding:7px 0 0 35px; margin:15px 0 0 7px; }
+span.options2									{ background:url(images/options2.gif) no-repeat; width:123px; height:19px; color:#298cba; font-size:11px; 
+												  display:block; padding:7px 0 0 35px; margin:15px 0 0 7px; float:left; clear:both; }
+.thumbImageDiv									{ float:left; width:200px; }
+.thumbOptions									{ float:left; width:320px; margin:0 0 0 20px; }
+.thumbOptions label								{ margin:10px 0 5px 0; display:block; }
+.deleteThumb									{ margin:10px 0 0 0; }
+
+
+#tabsInner										{ width: 95%; text-align: left; margin: 0 0 0 10px; height: 41px; float:left; position:relative; z-index:100; }
+#tabsInner a 									{ display: block; color: #21759b; text-decoration:none; float: left; border:none; padding: 4px 4px 7px 4px; 
+												  margin-right: .4em; background:none; height:13px; font-weight:bold; height:31px; opacity:0.3;filter:alpha(opacity=30); } 
+#tabsInner a:hover								{ opacity:1;filter:alpha(opacity=100); }
+#tabsInner a.active 							{ border: 1px solid #dfdfdf; border-bottom: none; color:#464646; text-decoration:none; background:#f2f2f2;
+												  -moz-border-radius-topleft: 3px;
+												  -khtml-border-top-left-radius: 3px; -webkit-border-top-left-radius: 3px; border-top-left-radius: 3px;	
+												  -moz-border-radius-topright: 3px; -khtml-border-top-right-radius: 3px; -webkit-border-top-right-radius: 3px;
+												  border-top-right-radius: 3px; padding: 3px 3px 7px 3px; opacity:1;filter:alpha(opacity=100); }
+.tabInner-div 									{ clear:left; width:95%; border:1px solid #dfdfdf; padding:10px; float:left; position:relative; z-index:50; background:#f2f2f2;  -moz-border-radius: 3px; -khtml-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;	
+												 }
+.chooseVid										{ margin:0 0 10px 0; }
+.useThis										{ float:left; clear:both; margin:10px 0 0 0; }

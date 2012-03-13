@@ -1,0 +1,130 @@
+/* Dark specific css */
+
+/* Global reset
+-------------------------------------------------------------------*/
+
+	body a 						{ color:#ED0773; text-shadow:#000 0 1px 0; }
+	body a:hover				{ color:#ED0773; } /* Float an element left with a margin */
+	
+	blockquote					{ border-left:3px solid #fff; }
+
+/* Default
+-------------------------------------------------------------------*/
+
+	html, body 					{ color:#aaa; }	
+	body 						{ background:#111; text-shadow:#000 0 2px 0; }
+
+/* Template
+-------------------------------------------------------------------*/
+
+	#header						{ background:#111; -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 1); -moz-box-shadow:0 0 10px rgba(0, 0, 0, 1); }
+
+/* Header
+-------------------------------------------------------------------*/
+
+	#header div					{ color:#777; }
+	#header a					{ color:#FF1493; }
+	
+	#header input,
+	#header select 				{ background:#333; color:#fff; }
+	#header input:focus,
+	#header select:focus 		{ background:#fff;color:#555; }
+	
+	#header ul li				{ border-left:1px solid #666; }
+	
+/* Post
+-------------------------------------------------------------------*/
+
+	h1							{ color:#fff; border-bottom:3px dotted #ccc; padding:0 0 20px 0; }
+	h1,
+	h1 a	 					{ color:#FF1493; }
+	h1 a:hover	 				{ color:#FF1493; }
+	
+	#coreContent h2,
+	#coreContent h3,
+	#coreContent h4				{ color:#fff; border-top:1px dotted #444; text-shadow:#000 0 2px 1px; }
+
+	.post 						{ background:#181818; }
+	
+	.post:hover					{ -webkit-box-shadow:0 0 10px rgba(0, 0, 0, .3); -moz-box-shadow:0 0 10px rgba(0, 0, 0, .3); text-shadow:#000 0 1px 0; }
+	.post:active				{ -webkit-box-shadow:0 0 10px rgba(0, 0, 0, .3); -moz-box-shadow:0 0 10px rgba(0, 0, 0, .3); }
+	
+	.post-content h2	 		{ color:#fff; }
+	.post-content a	 			{ color:#FF1493; }
+	.post-content a:hover		{ color:#FF1493; }
+	
+	.post-content .bubble		{ padding:0; }
+	
+	.copyright					{ color:#aaa; }
+	.copyright a				{ color:#fff; }
+
+	.singlepost img		 		{ border:1px solid #444; }
+
+	.archiveTitle				{ background:#111; }
+	.archiveTitle h2			{ color:#ED0773; }
+	.archiveTitle .currentCat span	{ color:#FF1493; }
+	.archiveTitle h3			{ color:#ED0773; }
+	
+	.pagination					{ border-top:1px dotted #444; border-bottom:1px dotted #444; }
+	.prevpost a,	
+	.nextpost a					{ background:#000; }
+	.prevpost a:hover,	
+	.nextpost a:hover			{ background:#FF1493; color:#fff; }
+	
+	#top_link					{ background:url(../../images/arrow.png) no-repeat 9px 9px #444; color:#fff; }
+	#top_link:hover				{ background:url(../../images/arrow.png) no-repeat 9px 9px #FF1493; }
+	
+	#rss_link					{ background:url(../../images/rss.png) no-repeat 9px 9px #444; color:#fff; }
+	#rss_link:hover				{ background:url(../../images/rss.png) no-repeat 9px 9px #FF1493; }
+	
+	#searchBox					{ background:url(../../images/search.png) no-repeat 9px 9px #444; color:#fff; }
+	#searchBox:hover			{ background:url(../../images/search.png) no-repeat 9px 9px #FF1493; }
+
+	
+/* Sidebar elements
+-------------------------------------------------------------------*/	
+	
+	/* Contains the entire tabbed section */
+	.tabbed ul.tabs li a 		{ background:#282828; }
+	.tabbed ul.tabs li a:hover	{ background:#FF1493; color:#fff; }
+	
+	.tabbed ul.tabs li a.tab-current { background:#333; }
+	
+	.tabbed div 				{ background:#333; }
+	
+	.tabbed div ul li 			{ border-bottom:1px dotted #282828; }
+	.tabbed div ul li a 		{ background:#333; }
+	.tabbed div ul li a:hover 	{ background:#FF1493; color:#fff; }
+
+/* Footer elements
+-------------------------------------------------------------------*/
+
+	#footer						{ border-top:1px solid #444; }
+	#footer a					{ color:#fff; }
+	
+	#footer ul li				{ border-left:1px solid #666; }
+
+/* Comments
+-------------------------------------------------------------------*/
+
+	#comments h4				{ color:#ED0773; border-top:1px dotted #444; }
+	
+	.commentEntry				{ border-top:1px dotted #444; border-bottom:1px dotted #444; }
+	.avatar						{ background:#fff; border:1px solid #444; }
+	.commentContent				{ color:#ED0773; }
+	.commentMeta				{ border-top:1px dotted #444; }
+	
+	/* Comment form
+	--------------- */
+	
+	.commentForm em				{ color:#ED0773; }
+	
+	input[type=text],
+	textarea					{ border:1px solid #333; color:#ccc; background:#333; }
+	
+	input:focus,
+	textarea:focus				{ border-color:#333; color:#111; background:#fff; }
+	
+	input[type=submit]			{ color:#fff; background:#333; border:1px solid #333; }
+	input[type=submit]:hover,
+	input[type=submit]:focus	{ background:#FF1493; border-color:#FF1493; }

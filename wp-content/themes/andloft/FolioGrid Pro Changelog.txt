@@ -1,0 +1,22 @@
+FolioGrid Pro Changelog
+
+2011.07.10 - Version 1.0.5
+ - Fixed error with uploading images in WordPress 3.2
+
+2011.03.30 - Version 1.0.4
+ - Changed upload method for images so it uses WordPress built in uploader
+ - Ability to upload PNGs
+
+2010.11.28 - Version 1.0.3
+ - Fixed Gooogle Analytics input.
+ - Fixed paths to images on category pages.
+
+2010.11.17 - Version 1.0.2
+ - Fixed issue with infinite scroll
+
+2010.10.20 - Version 1.0.1
+ - Fixed issue with stacking posts on home page.
+ - Added jQuery.noconflict() so JQuery doesn't conflict with other plugins.
+	
+2010.09.27 - Version 1.0
+ - Initial release :)
