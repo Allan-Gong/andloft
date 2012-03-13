@@ -12,7 +12,12 @@ define('CONCATENATE_SCRIPTS', false);
 
 // allow post thumbnails
 add_theme_support( 'post-thumbnails', array( 'post' ) ); // Add it for posts
-set_post_thumbnail_size( 220, 161, true );
+set_post_thumbnail_size( 200, 170, true );
+
+add_image_size( 'thumbnail-post', 200, 180, true );
+add_image_size( 'thumbnail-twocols', 430, 400, true );
+add_image_size( 'thumbnail-threecols', 660, 600, true );
+
 add_image_size( 'post', 200, 9999 );
 add_image_size( 'twocols', 430, 9999 );
 add_image_size( 'threecols', 660, 9999 );

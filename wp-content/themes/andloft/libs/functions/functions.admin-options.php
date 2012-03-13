@@ -149,7 +149,7 @@ function frogs_admin() {
 	
 		<h2><?php echo $themename; ?> Settings</h2>
 
-		<iframe src="http://www.frogsthemes.com/adminheaders/FGP/FGP.html" height="170px" width="740px" style="padding:0; margin:0;"></iframe>
+		<!-- <iframe src="http://www.frogsthemes.com/adminheaders/FGP/FGP.html" height="170px" width="740px" style="padding:0; margin:0;"></iframe> -->
 		
 		<div id="message" class="updated fade" style="position:absolute;"><p><strong><?=$themename;?> settings saved.</strong></p></div>
 

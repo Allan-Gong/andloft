@@ -84,7 +84,8 @@ function frogs_image($postID)
 	if(has_post_thumbnail())
 	{
 		$image_id = get_post_thumbnail_id();  
-		$image_url = wp_get_attachment_image_src($image_id,frogs_column_width($postID));  
+		$image_url = wp_get_attachment_image_src($image_id,frogs_column_width($postID));
+		//$image_url = wp_get_attachment_image_src($image_id, 'thumbnail-' . frogs_column_width($postID));  
 		$image_url = $image_url[0]; 
 
 		echo '<a href="'.get_permalink($postID).'"><img src="'.$image_url.'" alt="" style="'.cssifysize($image_url).'" /></a>';
