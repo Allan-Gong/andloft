@@ -8,6 +8,8 @@
 *
 */
 
+add_theme_support( 'automatic-feed-links' );
+
 define('CONCATENATE_SCRIPTS', false);
 
 // allow post thumbnails

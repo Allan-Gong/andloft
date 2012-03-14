@@ -252,8 +252,8 @@ function apt_publish_post($post_id)
     // Get all images from post's body
     preg_match_all('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'>]*)/i', $post[0]->post_content, $matches);
 
-    if (count($matches)) {
-        foreach ($matches[0] as $key => $image) {
+    if ( count($matches) ) {
+        foreach ( $matches[0] as $key => $image ) {
             /**
              * If the image is from wordpress's own media gallery, then it appends the thumbmail id to a css class.
              * Look for this id in the IMG tag.
@@ -264,7 +264,7 @@ function apt_publish_post($post_id)
             // If thumb id is not found, try to look for the image in DB. Thanks to "Erwin Vrolijk" for providing this code.
             if (!$thumb_id) {
                 $image = substr($image, strpos($image, '"')+1);
-                $result = $wpdb->get_results("SELECT ID FROM {$wpdb->posts} WHERE guid = '".$image."'");
+                $result = $wpdb->get_results("SELECT ID FROM {$wpdb->posts} WHERE guid = '" . $image . "'");
                 $thumb_id = $result[0]->ID;
             }
 
