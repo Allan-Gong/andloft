@@ -1,8 +1,11 @@
 <?php
-
+	
+	$google_search_by_image_base_url = 'http://www.google.co.in/searchbyimage/upload';
+	//$google_search_by_image_base_url = 'http://www.google.co.in/searchbyimage';
+	
 	//create array of data to be posted
 	$post = array(
-		'encoded_image' => '@D:\Tools\wamp\www\wordpress\image_search_test_sample.jpg',
+		'encoded_image' => '@C:\google_search_by_image_test_image.jpg',
 		'h1'            => 'en',
 		'safe'          => 'off',
 		'bih'           => '800',
@@ -11,6 +14,18 @@
 		'filename'      => ''
 	);
 
+	// $post = array(
+		// 'image_url'     => 'http://ww4.sinaimg.cn/bmiddle/776ec81ajw1dr0pa3ju8zj.jpg',
+		// 'h1'            => 'en',
+		// 'source'        => 'hp',
+		// 'bih'           => '634',
+		// 'biw'           => '1280',
+		// 'gbv'           => '2',
+		// 'btnG'          => 'Search Image',
+		// 'image_content' => '',
+		// 'filename'      => '',
+	// );
+	
 	$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";
 	$header[1] = "text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
 	$header[2] = "Cache-Control: max-age=0";
@@ -20,7 +35,7 @@
 	$header[6] = "Accept-Language: en-us,en;q=0.5";
 	$header[7] = "Pragma: ";
 
-	$curl_connection = curl_init('http://www.google.co.in/searchbyimage/upload');
+	$curl_connection = curl_init($google_search_by_image_base_url);
 
 	//set options
 	curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
