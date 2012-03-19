@@ -1,0 +1,143 @@
+<?php
+
+
+$image_path = 'D:/image_test/1.jpg';
+// $image_path = 'D:/image_test/2.jpg';
+// $image_path = 'D:/image_test/3.jpg';
+// $image_path = 'D:/image_test/4.jpg';
+
+$result = google_search_by_image_upload();
+
+echo $result;
+
+function google_search_by_image_upload ($image_absolute_path) {
+	
+	$DEFAULT_IMAGE_TITLE = 'No title yet';
+
+	$result_image_title = $DEFAULT_IMAGE_TITLE;
+
+	if ( empty($image_absolute_path) ) {
+		return $result_image_title;
+	} 
+
+	$google_search_by_image_base_url = 'http://www.google.co.in/searchbyimage/upload';
+
+	$post_args = array(
+		'encoded_image' => "@$image_absolute_path",
+		'h1'            => 'en',
+		'safe'          => 'off',
+		'bih'           => '800',
+		'biw'           => '1280',
+		'image_content' => '',
+		'filename'      => ''
+	);
+
+	$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";
+	$header[1] = "text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
+	$header[2] = "Cache-Control: max-age=0";
+	$header[3] = "Connection: keep-alive";
+	$header[4] = "Keep-Alive: 300";
+	$header[5] = "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7";
+	$header[6] = "Accept-Language: en-us,en;q=0.5";
+	$header[7] = "Pragma: ";
+
+	$curl_connection = curl_init($google_search_by_image_base_url);
+
+	//set options
+	curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+	curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1; rv:10.0.2) Gecko/20100101 Firefox/10.0.2");
+	curl_setopt($curl_connection, CURLOPT_HTTPHEADER, $header); 
+	curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, 1);
+	curl_setopt($curl_connection, CURLOPT_POST, true);
+
+	//set data to be posted
+	curl_setopt($curl_connection, CURLOPT_POSTFIELDS, $post);
+
+	//perform our request
+	$result = curl_exec($curl_connection);
+
+	//show information regarding the request
+	// print_r(curl_getinfo($curl_connection));
+	// echo curl_errno($curl_connection) . '-' . curl_error($curl_connection);
+
+	//close the connection
+	curl_close($curl_connection);
+
+	// parse result and get information we wanted:
+	// print_r($result);
+
+	/* 
+		try to get the image title: 
+
+		Best guess for this image: <a href="google_image_serach_url">$image_title</a>
+
+		if the above line can not be found:
+
+		try the following:
+		1. Pages that include matching images: first english item to grab the title (Also list all items in the post content)
+		   exclude: id="imagebox_bigimages", 
+		2. set image title to be 'No title yet' and notify admin to manually set a title later.
+
+		Also include a link for google search by image (opens new tab) at the bottom of the post content.
+	*/
+
+	$doc = new DOMDocument();
+
+	$doc->loadHTML($result);
+
+	$div_top_stuff =  $doc->getElementById('topstuff');
+
+	if ( $div_top_stuff.hasChildNodes() and sizeof($div_top_stuff->childNodes) == 3 ) {
+
+		$childNodes = $div_top_stuff->childNodes;
+
+		$best_guess_image_title_div = $childNodes[2];
+		// Best guess for this image exists 
+
+	} else {
+		// image title need to be grabbed from ol id="rso"
+
+		$ol_rso =  $doc->getElementById('rso');
+
+		$li_items = $ol_rso->childNodes;
+
+		foreach ( $li_items as $li_item ) {
+			if ( $li_item.getAttribute('id') == 'imagebox_bigimages' ) {
+				continue;
+			}
+
+			if ( $li_item.getAttribute('class') == 'g' ) {
+				$li_item_dom_document = new DOMDocument();
+
+				$li_item_dom_document->loadHTML($li_item->nodeValue);
+
+				$li_item_h3 = $li_item_dom_document->getElementsByTagName('h3');
+
+				if ( $li_item_h3->length == 0 ) {
+					continue;
+				}
+
+				$li_item_h3_a = $li_item_h3->firstChild;
+
+				$li_item_h3_a_value = $li_item_h3_a->nodeValue;
+
+				if ( preg_match('/[^A-Za-z0-9]/', $li_item_h3_a_value) ) {
+				  $result_image_title = $li_item_h3_a_value;
+				  break;
+				}
+			}
+		}
+	}
+
+	if ( $result_image_title === $DEFAULT_IMAGE_TITLE ) {
+		//send out email
+	}
+
+	return $result_image_title;
+
+}
+
+
+?>
