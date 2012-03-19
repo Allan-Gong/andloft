@@ -140,4 +140,8 @@ function get_image_info_from_google_search_by_image() {
 
 }
 
+function is_english ($string) {
+  
+}
+
 ?>

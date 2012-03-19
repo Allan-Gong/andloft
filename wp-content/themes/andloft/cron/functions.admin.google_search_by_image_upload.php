@@ -1,12 +1,12 @@
 <?php
 
 
-$image_path = 'D:/image_test/1.jpg';
+$image_path = 'C:/test_image/1.jpg';
 // $image_path = 'D:/image_test/2.jpg';
 // $image_path = 'D:/image_test/3.jpg';
 // $image_path = 'D:/image_test/4.jpg';
 
-$result = google_search_by_image_upload();
+$result = google_search_by_image_upload($image_path);
 
 echo $result;
 
@@ -29,7 +29,7 @@ function google_search_by_image_upload ($image_absolute_path) {
 		'bih'           => '800',
 		'biw'           => '1280',
 		'image_content' => '',
-		'filename'      => ''
+		'filename'      => '',
 	);
 
 	$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";
@@ -53,7 +53,7 @@ function google_search_by_image_upload ($image_absolute_path) {
 	curl_setopt($curl_connection, CURLOPT_POST, true);
 
 	//set data to be posted
-	curl_setopt($curl_connection, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($curl_connection, CURLOPT_POSTFIELDS, $post_args);
 
 	//perform our request
 	$result = curl_exec($curl_connection);
@@ -66,7 +66,7 @@ function google_search_by_image_upload ($image_absolute_path) {
 	curl_close($curl_connection);
 
 	// parse result and get information we wanted:
-	// print_r($result);
+	//print_r($result);
 
 	/* 
 		try to get the image title: 
@@ -87,14 +87,16 @@ function google_search_by_image_upload ($image_absolute_path) {
 
 	$doc->loadHTML($result);
 
-	$div_top_stuff =  $doc->getElementById('topstuff');
+	$div_top_stuff = $doc->getElementById('topstuff');
 
-	if ( $div_top_stuff.hasChildNodes() and sizeof($div_top_stuff->childNodes) == 3 ) {
+	$div_top_stuff_child_div_node_list = $div_top_stuff->getElementsByTagName('div');
 
-		$childNodes = $div_top_stuff->childNodes;
+	$div_top_stuff_child_div_node_list_last_child = $div_top_stuff_child_div_node_list->item($div_top_stuff_child_div_node_list->length - 1);
 
-		$best_guess_image_title_div = $childNodes[2];
-		// Best guess for this image exists 
+	if ( false !== strpos($div_top_stuff_child_div_node_list_last_child->nodeValue, 'Best guess for this image') ) {
+		
+		// Best guess for this image exists
+		$result_image_title = $div_top_stuff_child_div_node_list_last_child->lastChild->textContent;
 
 	} else {
 		// image title need to be grabbed from ol id="rso"
@@ -104,28 +106,31 @@ function google_search_by_image_upload ($image_absolute_path) {
 		$li_items = $ol_rso->childNodes;
 
 		foreach ( $li_items as $li_item ) {
-			if ( $li_item.getAttribute('id') == 'imagebox_bigimages' ) {
+
+			if ( !method_exists($li_item, 'getAttribute') ) {
 				continue;
 			}
 
-			if ( $li_item.getAttribute('class') == 'g' ) {
-				$li_item_dom_document = new DOMDocument();
+			if ( $li_item->getAttribute('id') == 'imagebox_bigimages' ) {
+				continue;
+			}
 
-				$li_item_dom_document->loadHTML($li_item->nodeValue);
+			if ( $li_item->getAttribute('class') == 'g' ) {
+				try{
+					$li_item_tds = $li_item->firstChild->firstChild->firstChild->childNodes;
 
-				$li_item_h3 = $li_item_dom_document->getElementsByTagName('h3');
+					$li_item_td = $li_item_tds->item(1);
 
-				if ( $li_item_h3->length == 0 ) {
+					$li_item_h3_a = $li_item_td->firstChild->firstChild;
+
+					$li_item_h3_a_value = $li_item_h3_a->textContent;
+
+					$result_image_title = $li_item_h3_a_value;
+
+					break;
+				} catch(Exception $e){
+					//echo 'Exception: ' . $e->getMessage();
 					continue;
-				}
-
-				$li_item_h3_a = $li_item_h3->firstChild;
-
-				$li_item_h3_a_value = $li_item_h3_a->nodeValue;
-
-				if ( preg_match('/[^A-Za-z0-9]/', $li_item_h3_a_value) ) {
-				  $result_image_title = $li_item_h3_a_value;
-				  break;
 				}
 			}
 		}
@@ -136,8 +141,6 @@ function google_search_by_image_upload ($image_absolute_path) {
 	}
 
 	return $result_image_title;
-
 }
-
 
 ?>
