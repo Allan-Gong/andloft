@@ -1,5 +1,6 @@
 <?php
 
+require_once( 'functions.admin.utils.php' );
 
 $image_path = 'C:/test_image/1.jpg';
 // $image_path = 'D:/image_test/2.jpg';
@@ -125,9 +126,11 @@ function google_search_by_image_upload ($image_absolute_path) {
 
 					$li_item_h3_a_value = $li_item_h3_a->textContent;
 
-					$result_image_title = $li_item_h3_a_value;
+					if ( is_english($li_item_h3_a_value) ) {
+						$result_image_title = $li_item_h3_a_value;
+						break;
+					}
 
-					break;
 				} catch(Exception $e){
 					//echo 'Exception: ' . $e->getMessage();
 					continue;
