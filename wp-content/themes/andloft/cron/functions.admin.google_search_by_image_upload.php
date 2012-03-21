@@ -2,26 +2,39 @@
 
 require_once( 'functions.admin.utils.php' );
 
-$image_path = 'C:/test_image/1.jpg';
+// $image_path = 'C:/test_image/1.jpg';
+
+
+// $image_path = 'D:/image_test/1.jpg';
 // $image_path = 'D:/image_test/2.jpg';
 // $image_path = 'D:/image_test/3.jpg';
 // $image_path = 'D:/image_test/4.jpg';
+//$image_path = 'D:/image_test/5.jpg';
+// $image_path = 'D:/image_test/6.jpg';
 
-$result = google_search_by_image_upload($image_path);
+//$result = google_search_by_image_upload($image_path);
 
-echo $result;
+//print_r($result);
 
 function google_search_by_image_upload ($image_absolute_path) {
-	
+
+	// print $image_absolute_path . '<br />';
+
+	error_reporting(E_ERROR);
+
 	$DEFAULT_IMAGE_TITLE = 'No title yet';
 
 	$result_image_title = $DEFAULT_IMAGE_TITLE;
+
+	$result_image_title_url = '';
 
 	if ( empty($image_absolute_path) ) {
 		return $result_image_title;
 	} 
 
 	$google_search_by_image_base_url = 'http://www.google.co.in/searchbyimage/upload';
+
+	$google_search_base_url = 'https://www.google.com';
 
 	$post_args = array(
 		'encoded_image' => "@$image_absolute_path",
@@ -98,6 +111,7 @@ function google_search_by_image_upload ($image_absolute_path) {
 		
 		// Best guess for this image exists
 		$result_image_title = $div_top_stuff_child_div_node_list_last_child->lastChild->textContent;
+		$result_image_title_url = $google_search_base_url . $div_top_stuff_child_div_node_list_last_child->lastChild->getAttribute('href');
 
 	} else {
 		// image title need to be grabbed from ol id="rso"
@@ -128,6 +142,9 @@ function google_search_by_image_upload ($image_absolute_path) {
 
 					if ( is_english($li_item_h3_a_value) ) {
 						$result_image_title = $li_item_h3_a_value;
+
+						$result_image_title_url = $li_item_h3_a->getAttribute('href');
+
 						break;
 					}
 
@@ -143,7 +160,10 @@ function google_search_by_image_upload ($image_absolute_path) {
 		//send out email
 	}
 
-	return $result_image_title;
+	return array(
+		'image_title' => $result_image_title,
+		'image_url'   => $result_image_title_url,
+	);
 }
 
 ?>
