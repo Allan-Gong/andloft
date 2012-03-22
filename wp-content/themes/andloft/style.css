@@ -260,3 +260,137 @@ Tags:simple, clean, single column, grid, portfolio
 	
 	#content .contactform input[type=text],
 	#content .contactform textarea	{ width:530px; }
+
+/* Google Search by image result
+-------------------------------------------------------------------*/
+	div#ires {
+		width: 530px;
+		margin: 2em 0 0 0;
+		padding-top: 6px;
+	}
+
+	#ires ol#rso {
+
+	}
+
+	#ires ol#rso li {
+		list-style: none outside none;
+		line-height: 1.2;
+		border: 0 none;
+	}
+
+	#ires h3, #res h3, #tads h3, #tadsb h3, #mbEnd h3 {
+		font-size: medium;
+		font-weight: normal;
+		margin: 0;
+		padding: 0;
+		display: inline;
+	}
+
+	#ires ol#rso li.g {
+		margin-bottom: 23px;
+	}
+
+	#ires .vsc {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+	}
+
+	#ires .ts {
+		border-collapse: collapse;
+	}
+
+	#ires .ts tr td:nth-child(1) a {
+		pointer-events: none;
+		cursor: default;
+	}
+
+	#ires .f, .f a:link, .m, .c h2, #mbEnd h2, #tads h2, #tadsb h2, #tadsto h2, .descbox {
+		color: #666666;
+	}
+
+	#res h3.r {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	#ires a:link, .w, .q:active, .q:visited, .tbotu {
+		color: #1122CC;
+		cursor: pointer;
+	}
+
+	#ires .s {
+		color: #222222;
+		max-width: 42em;
+	}
+
+	#ires .kv, .kvs, .slp {
+		display: block;
+		margin-bottom: 1px;
+	}
+
+	#ires .f, .f a:link, .m, .c h2, #mbEnd h2, #tads h2, #tadsb h2, #tadsto h2, .descbox {
+		color: #666666;
+	}
+
+	#ires div.kv > cite {
+		display: inline-block;
+		margin-bottom: 1px;
+	}
+
+	#ires .a, cite, cite a:link, cite a:visited, .cite, .cite:link, #mbEnd cite b, #tads cite b, #tadsb cite b, #tadsto cite b, #ans > i, .bc a:link {
+		color: #009933;
+		font-style: normal;
+	}
+
+	#ires .vshid {
+		display: none;
+	}
+
+	#ires .st, .ac {
+		line-height: 1.24;
+	}
+
+	#ires div.vspib {
+		background: none repeat scroll 0 0 transparent;
+		bottom: 0;
+		cursor: default;
+		height: auto;
+		margin: 0;
+		min-height: 40px;
+		padding-left: 9px;
+		padding-right: 4px;
+		position: absolute;
+		right: -37px;
+		top: -2px;
+		width: 28px;
+		z-index: 3;
+	}
+
+	#ires .vspii {
+		background-color: #F5F5F5;
+		background-image: -moz-linear-gradient(center top , #F5F5F5, #F1F1F1);
+		border: 1px solid #DCDCDC;
+		visibility: hidden;
+	}
+
+	#ires .vspii, .vspii-nh {
+		-moz-user-select: none;
+		border-radius: 2px 2px 2px 2px;
+		cursor: default;
+		height: 100%;
+		position: relative;
+	}
+
+	#ires .vspiic {
+		/*background: url("/images/nav_logo107.png") repeat scroll -23px -260px transparent;*/
+		height: 13px;
+		margin-left: 6px;
+		margin-top: -7px;
+		position: absolute;
+		top: 50%;
+		width: 15px;
+	}

@@ -42,7 +42,7 @@
 	
 	#coreContent h2,
 	#coreContent h3,
-	#coreContent h4				{ color:#333; border-top:1px dotted #444; text-shadow:#333 0 2px 1px; }
+	#coreContent h4				{ color:#333; /*border-top:1px dotted #444;*/ text-shadow:#333 0 2px 1px; }
 
 	.post 						{ background:#fff; }
 	

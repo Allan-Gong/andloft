@@ -3,7 +3,13 @@
 require_once( 'functions.admin.utils.php' );
 
 // $image_path = 'C:/test_image/1.jpg';
-
+// $image_path = 'C:/test_image/2.jpg';
+// $image_path = 'C:/test_image/3.jpg';
+// $image_path = 'C:/test_image/4.jpg';
+// $image_path = 'C:/test_image/5.jpg';
+// $image_path = 'C:/test_image/6.jpg';
+// $image_path = 'C:/test_image/7.jpg';
+// $image_path = 'C:/test_image/8.jpg';
 
 // $image_path = 'D:/image_test/1.jpg';
 // $image_path = 'D:/image_test/2.jpg';
@@ -12,9 +18,63 @@ require_once( 'functions.admin.utils.php' );
 //$image_path = 'D:/image_test/5.jpg';
 // $image_path = 'D:/image_test/6.jpg';
 
-//$result = google_search_by_image_upload($image_path);
+// $result = google_search_by_image_upload($image_path);
+// print_r($result);
 
-//print_r($result);
+function get_inner_HTML($node){
+
+	$doc = new DOMDocument();
+	foreach ($node->childNodes as $child){
+
+		if ( method_exists($child, 'getAttribute') and $child->getAttribute('id') == 'imagebox_bigimages' ) {
+			continue;
+		}
+
+		$doc->appendChild($doc->importNode($child, true));
+	}
+
+	return $doc->saveHTML();
+
+
+	// $doc = new DOMDocument();
+
+	// for ( $i = 0; $i < $node->length; $i++ ) {
+
+	// 	$child_i = $node->item($i);
+
+	// 	// if ( !method_exists($child_i, 'getAttribute') ) {
+	// 	// 	continue;
+	// 	// }
+
+	// 	// if ( $child_i->getAttribute('id') == 'imagebox_bigimages' ) {
+	// 	// 	continue;
+	// 	// }
+
+	// 	$doc->appendChild( $doc->importNode($child_j, true) );
+
+	// 	// $li_item_i_attribute_style = $child_i->getAttribute('style');
+
+	// 	// if ( !empty( $li_item_i_attribute_style ) ) {
+	// 	// 	for ( $j = $i + 1; $j < $node->length; $j++ ) {
+
+	// 	// 		$child_j = $node->item($j);
+
+	// 	// 		if ( !method_exists($child_j, 'getAttribute') ) {
+	// 	// 			continue;
+	// 	// 		}
+
+	// 	// 		if ( $child_j->getAttribute('id') == 'imagebox_bigimages' ) {
+	// 	// 			continue;
+	// 	// 		}
+
+	// 	// 		// need to fix image url
+	// 	// 		$doc->appendChild( $doc->importNode($child_j, true) );
+	// 	// 	}
+	// 	// }
+	// }
+
+	// return $doc->saveHTML();
+}
 
 function google_search_by_image_upload ($image_absolute_path) {
 
@@ -101,7 +161,8 @@ function google_search_by_image_upload ($image_absolute_path) {
 
 	$doc->loadHTML($result);
 
-	$ol_rso   =  $doc->getElementById('rso');
+	$div_search = $doc->getElementById('search');
+	$ol_rso   = $doc->getElementById('rso');
 	$li_items = $ol_rso->childNodes;
 
 	for ( $i = 0; $i < $li_items->length; $i++ ) {
@@ -110,6 +171,11 @@ function google_search_by_image_upload ($image_absolute_path) {
 		if ( !method_exists($li_item_i, 'getAttribute') ) {
 			continue;
 		}
+
+		// if ( $li_item_i->getAttribute('id') == 'imagebox_bigimages' ) {
+		// 	$ol_rso->removeChild($li_item_i);
+		// 	continue;
+		// }
 
 		$li_item_i_attribute_style = $li_item_i->getAttribute('style');
 
@@ -124,9 +190,10 @@ function google_search_by_image_upload ($image_absolute_path) {
 						continue;
 					}
 
-					if ( $li_item_j->getAttribute('id') == 'imagebox_bigimages' ) {
-						continue;
-					}
+					// if ( $li_item_j->getAttribute('id') == 'imagebox_bigimages' ) {
+					// 	$ol_rso->removeChild($li_item_j);
+					// 	continue;
+					// }
 
 					if ( $li_item_j->getAttribute('class') == 'g' ) {
 						/*
@@ -136,7 +203,11 @@ function google_search_by_image_upload ($image_absolute_path) {
 									<tbody>
 										<tr>
 											<td>
-												<img />
+												<div>
+													<a href="/images?.....">
+														<img />
+													</a>
+												</div>
 											</td>
 											<td>
 												<h3><a href="url we wanted">text we wanted</a></h3>
@@ -154,20 +225,35 @@ function google_search_by_image_upload ($image_absolute_path) {
 						//             <li>      -> <table>  -> <tbody>  -> <tr>     -> <td>
 						$li_item_tds = $li_item_j->firstChild->firstChild->firstChild->childNodes;
 
+						// replace image url
+						// $img_item_td = $li_item_tds->item(0);
+						// $a_item_td = $img_item_td->firstChild->firstChild;
+
+						// if ( method_exists($a_item_td, 'getAttribute') ) {
+						// 	$a_item_td_href_attribute = $a_item_td->getAttribute('href');
+
+						// 	if ( method_exists($a_item_td, 'setAttribute') ) {
+						// 		$a_item_td->setAttribute( 'href', 'http://www.google.com.au' . $a_item_td_href_attribute );
+						// 	}
+						// }
+
 						// seconde <td> is what we wanted
-						$li_item_td = $li_item_tds->item(1);
+						if ( method_exists($li_item_tds, 'item') ) {
+							$li_item_td = $li_item_tds->item(1);
 
-						//              <td>       -> <h3>     -> <a>      
-						$li_item_h3_a = $li_item_td->firstChild->firstChild;
+							//              <td>       -> <h3>     -> <a>      
+							$li_item_h3_a = $li_item_td->firstChild->firstChild;
 
-						$li_item_h3_a_value = $li_item_h3_a->textContent;
+							$li_item_h3_a_value = $li_item_h3_a->textContent;
 
-						if ( is_english($li_item_h3_a_value) ) {
-							$result_image_title     = $li_item_h3_a_value;
-							$result_image_title_url = $li_item_h3_a->getAttribute('href');
+							if ( is_english($li_item_h3_a_value) ) {
+								$result_image_title     = $li_item_h3_a_value;
+								$result_image_title_url = $li_item_h3_a->getAttribute('href');
 
-							break;
+								break;
+							}							
 						}
+
 					} // if ( $li_item_j->getAttribute('class') == 'g' )
 				} // foreach ( $j = $i + 1; $j < $li_items->length; j++ )
 			} // if ( false !== strpos($text_pages_that_include_matching_images, 'Pages that include matching images') )
@@ -230,13 +316,17 @@ function google_search_by_image_upload ($image_absolute_path) {
 	// 	}
 	// }
 
-	if ( $result_image_title === $DEFAULT_IMAGE_TITLE ) {
+	$google_search_result_html = '';
+
+	if ( $result_image_title !== $DEFAULT_IMAGE_TITLE ) {
 		//send out email
+		$google_search_result_html = '<div id="ires"><ol id="rso">' . get_inner_HTML($ol_rso) . '</ol></div>';
 	}
 
 	return array(
-		'image_title' => $result_image_title,
-		'image_url'   => $result_image_title_url,
+		'image_title'               => $result_image_title,
+		'image_url'                 => $result_image_title_url,
+		'google_search_result_html' => $google_search_result_html,
 	);
 }
 

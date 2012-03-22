@@ -115,10 +115,10 @@ function upload_image_post(
     return false;
   }
 
-  $post_id = wp_update_post( array(
-    'ID'          => $post_id,
-    'post_status' => 'publish',
-  ));
+  // $post_id = wp_update_post( array(
+  //   'ID'          => $post_id,
+  //   'post_status' => 'publish',
+  // ));
 
   if ( !$post_id ) {
     delete_post($post_id, "if ( !$post_id )");
@@ -141,18 +141,6 @@ function get_random_post_column() {
   } else {
     $result = 'One';
   }
-
-  // switch ( rand(1,3) ) {
-  //   case 1:
-  //       $result = 'One';
-  //       break;
-  //   case 2:
-  //       $result = 'Two';
-  //       break;
-  //   case 3:
-  //       $result = 'Three';
-  //       break;
-  // }
 
   return $result;
 }
