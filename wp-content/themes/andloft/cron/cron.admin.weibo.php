@@ -81,7 +81,7 @@ function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 	$post_data['source']   = '2365217913';
 	$post_data['user_id']  = $weibo_id;
 	$post_data['feature']  = '0';
-	$post_data['count']    = '5';
+	$post_data['count']    = '10';
 	$post_data['base_app'] = '0';
 
 	if ( $since_id ) {
@@ -146,11 +146,39 @@ function add_weibo_meta_data_to_post( $post_id, $weibo_id, $weibo_mid ) {
 	return $post_id;
 }
 
+function generate_legal_text(){
+	return '<p><strong>Please note:</strong> content in this post is collected from the internet and can <strong>NOT</strong> be used for any commercial purpose.</p>';
+}
+
+function generate_google_search_by_image_form($image_absolute_path) {
+
+	if ( !empty($image_absolute_path) ) {
+
+		return
+			'<p>For more information about this post, please search Google Search by image by clicking the "Search" button below (opens new tab): </p>'
+			. '<div>'
+				. '<form action="http://www.google.co.in/searchbyimage/upload" method="post" enctype="multipart/form-data" target="_blank">'
+					. '<input style="display:hidden;" type="file" name="encoded_image" value="' . $image_absolute_path . '">'
+					. '<input type="hidden" name="h1" value="en">'
+					. '<input type="hidden" name="safe" value="off">'
+					. '<input type="hidden" name="bih" value="800">'
+					. '<input type="hidden" name="biw" value="1280">'
+					. '<input type="submit" name="Search" value="Search">'
+				.'</form>'
+				. '<br /><br />'
+			. '</div>'
+		;
+
+	} else {
+		return '';
+	}
+}
+
 function generate_google_search_by_image_content ( $google_search_by_image_url ) {
 	$result_content_string = '<p>Detailed description for this post will come soon ...</p>';
 
 	if ( !empty($google_search_by_image_url) ) {
-		$result_content_string = "<p>For more information about this post, please check out <a target=\"_blank\" href=\"{$google_search_by_image_url}\">Google image search result of this post (opens new window/tab)</a></p>";
+		$result_content_string = "<p>For more information about this post, please check out:</p>";
 	}
 
 	return $result_content_string;
@@ -194,7 +222,7 @@ function cron_job() {
 	foreach ( $WEIBOs as $weibo_array ) {
 		$latest_weibo_mid = get_latest_weibo_mid_by_weibo_id($weibo_array['weibo_id']);
 
-		// print '$latest_weibo_mid: ' . $latest_weibo_mid . '<br />';
+		print '$latest_weibo_mid: ' . $latest_weibo_mid . '<br />';
 
 		// if ( !$latest_weibo_mid ) {
 		// 	continue;
@@ -229,10 +257,12 @@ function cron_job() {
 					$post_id = update_image_post_title_and_add_content(
 						$post_id,
 						$google_search_by_image_result['image_title'],
-						generate_google_search_by_image_content($google_search_by_image_result['image_url'])
+						//generate_google_search_by_image_content($google_search_by_image_result['image_url'])
+						generate_google_search_by_image_form($image_absolute_path) . generate_legal_text()
 					);
 
 					if ( $google_search_by_image_result['image_title'] == 'No title yet' ) {
+						print 'deleted post - post_id: ' . $post_id . '<br />';
 						delete_post($post_id);
 					}
 

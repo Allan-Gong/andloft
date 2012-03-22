@@ -101,60 +101,134 @@ function google_search_by_image_upload ($image_absolute_path) {
 
 	$doc->loadHTML($result);
 
-	$div_top_stuff = $doc->getElementById('topstuff');
+	$ol_rso   =  $doc->getElementById('rso');
+	$li_items = $ol_rso->childNodes;
 
-	$div_top_stuff_child_div_node_list = $div_top_stuff->getElementsByTagName('div');
+	for ( $i = 0; $i < $li_items->length; $i++ ) {
+		$li_item_i = $li_items->item($i);
 
-	$div_top_stuff_child_div_node_list_last_child = $div_top_stuff_child_div_node_list->item($div_top_stuff_child_div_node_list->length - 1);
+		if ( !method_exists($li_item_i, 'getAttribute') ) {
+			continue;
+		}
 
-	if ( false !== strpos($div_top_stuff_child_div_node_list_last_child->nodeValue, 'Best guess for this image') ) {
-		
-		// Best guess for this image exists
-		$result_image_title = $div_top_stuff_child_div_node_list_last_child->lastChild->textContent;
-		$result_image_title_url = $google_search_base_url . $div_top_stuff_child_div_node_list_last_child->lastChild->getAttribute('href');
+		$li_item_i_attribute_style = $li_item_i->getAttribute('style');
 
-	} else {
-		// image title need to be grabbed from ol id="rso"
+		if ( !empty( $li_item_i_attribute_style ) ) {
+			$text_pages_that_include_matching_images = $li_item_i->firstChild->textContent;
 
-		$ol_rso =  $doc->getElementById('rso');
+			if ( false !== strpos($text_pages_that_include_matching_images, 'Pages that include matching images') ) {
+				for ( $j = $i + 1; $j < $li_items->length; $j++ ) {
+					$li_item_j = $li_items->item($j);
 
-		$li_items = $ol_rso->childNodes;
-
-		foreach ( $li_items as $li_item ) {
-
-			if ( !method_exists($li_item, 'getAttribute') ) {
-				continue;
-			}
-
-			if ( $li_item->getAttribute('id') == 'imagebox_bigimages' ) {
-				continue;
-			}
-
-			if ( $li_item->getAttribute('class') == 'g' ) {
-				try{
-					$li_item_tds = $li_item->firstChild->firstChild->firstChild->childNodes;
-
-					$li_item_td = $li_item_tds->item(1);
-
-					$li_item_h3_a = $li_item_td->firstChild->firstChild;
-
-					$li_item_h3_a_value = $li_item_h3_a->textContent;
-
-					if ( is_english($li_item_h3_a_value) ) {
-						$result_image_title = $li_item_h3_a_value;
-
-						$result_image_title_url = $li_item_h3_a->getAttribute('href');
-
-						break;
+					if ( !method_exists($li_item_j, 'getAttribute') ) {
+						continue;
 					}
 
-				} catch(Exception $e){
-					//echo 'Exception: ' . $e->getMessage();
-					continue;
-				}
-			}
-		}
-	}
+					if ( $li_item_j->getAttribute('id') == 'imagebox_bigimages' ) {
+						continue;
+					}
+
+					if ( $li_item_j->getAttribute('class') == 'g' ) {
+						/*
+							$li_item_j's structure
+							<li>
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<img />
+											</td>
+											<td>
+												<h3><a href="url we wanted">text we wanted</a></h3>
+												<div></div>
+											</td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+								<div>
+								</div>
+							</li>
+						*/
+
+						//             <li>      -> <table>  -> <tbody>  -> <tr>     -> <td>
+						$li_item_tds = $li_item_j->firstChild->firstChild->firstChild->childNodes;
+
+						// seconde <td> is what we wanted
+						$li_item_td = $li_item_tds->item(1);
+
+						//              <td>       -> <h3>     -> <a>      
+						$li_item_h3_a = $li_item_td->firstChild->firstChild;
+
+						$li_item_h3_a_value = $li_item_h3_a->textContent;
+
+						if ( is_english($li_item_h3_a_value) ) {
+							$result_image_title     = $li_item_h3_a_value;
+							$result_image_title_url = $li_item_h3_a->getAttribute('href');
+
+							break;
+						}
+					} // if ( $li_item_j->getAttribute('class') == 'g' )
+				} // foreach ( $j = $i + 1; $j < $li_items->length; j++ )
+			} // if ( false !== strpos($text_pages_that_include_matching_images, 'Pages that include matching images') )
+			break;
+		} // if ( !empty( $li_item_i->getAttribute('style') ) )
+	} // for ( $i = 0; $i < $li_items->length; i++ )
+
+	// $div_top_stuff = $doc->getElementById('topstuff');
+
+	// $div_top_stuff_child_div_node_list = $div_top_stuff->getElementsByTagName('div');
+
+	// $div_top_stuff_child_div_node_list_last_child = $div_top_stuff_child_div_node_list->item($div_top_stuff_child_div_node_list->length - 1);
+
+	// if ( false !== strpos($div_top_stuff_child_div_node_list_last_child->nodeValue, 'Best guess for this image') ) {
+		
+	// 	// Best guess for this image exists
+	// 	$result_image_title = $div_top_stuff_child_div_node_list_last_child->lastChild->textContent;
+	// 	$result_image_title_url = $google_search_base_url . $div_top_stuff_child_div_node_list_last_child->lastChild->getAttribute('href');
+
+	// } else {
+	// 	// image title need to be grabbed from ol id="rso"
+
+	// 	$ol_rso =  $doc->getElementById('rso');
+
+	// 	$li_items = $ol_rso->childNodes;
+
+	// 	foreach ( $li_items as $li_item ) {
+
+	// 		if ( !method_exists($li_item, 'getAttribute') ) {
+	// 			continue;
+	// 		}
+
+	// 		if ( $li_item->getAttribute('id') == 'imagebox_bigimages' ) {
+	// 			continue;
+	// 		}
+
+	// 		if ( $li_item->getAttribute('class') == 'g' ) {
+	// 			try{
+	// 				$li_item_tds = $li_item->firstChild->firstChild->firstChild->childNodes;
+
+	// 				$li_item_td = $li_item_tds->item(1);
+
+	// 				$li_item_h3_a = $li_item_td->firstChild->firstChild;
+
+	// 				$li_item_h3_a_value = $li_item_h3_a->textContent;
+
+	// 				if ( is_english($li_item_h3_a_value) ) {
+	// 					$result_image_title = $li_item_h3_a_value;
+
+	// 					$result_image_title_url = $li_item_h3_a->getAttribute('href');
+
+	// 					break;
+	// 				}
+
+	// 			} catch(Exception $e){
+	// 				//echo 'Exception: ' . $e->getMessage();
+	// 				continue;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	if ( $result_image_title === $DEFAULT_IMAGE_TITLE ) {
 		//send out email
