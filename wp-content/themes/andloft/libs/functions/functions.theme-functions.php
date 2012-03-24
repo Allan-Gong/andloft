@@ -345,7 +345,7 @@ function frogs_wp_footer()
 function frog_wp_the_excerpt_reloaded($args='')
 {
 	parse_str($args);
-	if(!isset($excerpt_length)) $excerpt_length = 120; // length of excerpt in words. -1 to display all excerpt/content
+	if(!isset($excerpt_length)) $excerpt_length = 20; // length of excerpt in words. -1 to display all excerpt/content
 	if(!isset($allowedtags)) $allowedtags = '<a>'; // HTML tags allowed in excerpt, 'all' to allow all tags.
 	if(!isset($filter_type)) $filter_type = 'none'; // format filter used => 'content', 'excerpt', 'content_rss', 'excerpt_rss', 'none'
 	if(!isset($use_more_link)) $use_more_link = 1; // display
@@ -361,7 +361,19 @@ function frog_wp_the_excerpt_reloaded($args='')
 	return frog_the_excerpt_reloaded($excerpt_length, $allowedtags, $filter_type, $use_more_link, $more_link_text, $force_more, $fakeit, $fix_tags, $no_more, $more_tag, $more_link_title, $showdots);
 }
 
-function frog_the_excerpt_reloaded($excerpt_length=120, $allowedtags='<a>', $filter_type='none', $use_more_link=true, $more_link_text="(more...)", $force_more=true, $fakeit=1, $fix_tags=true, $no_more=false, $more_tag='div', $more_link_title='Continue reading this entry', $showdots=true)
+function frog_the_excerpt_reloaded(
+	$excerpt_length=20, 
+	$allowedtags='<a>', 
+	$filter_type='none', 
+	$use_more_link=true, 
+	$more_link_text="[more...]", 
+	$force_more=true, 
+	$fakeit=1, 
+	$fix_tags=true, 
+	$no_more=false, 
+	$more_tag='div', 
+	$more_link_title='More', 
+	$showdots=true)
 {
 	if(preg_match('%^content($|_rss)|^excerpt($|_rss)%', $filter_type)) 
 	{

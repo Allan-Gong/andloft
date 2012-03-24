@@ -53,4 +53,14 @@ add_action('admin_init', 'frogs_add_init');
 add_action('admin_menu', 'frogs_add_admin');
 add_action('init', 'frogs_init');
 
+function post_title_excerpt($post_title) {
+	$post_title_excerpt = $post_title;
+
+	if ( strlen($post_title) > 25 ) {
+		$post_title_excerpt = substr($post_title, 0, 24) . '...';
+	}
+
+	return $post_title_excerpt;
+}
+
 ?>

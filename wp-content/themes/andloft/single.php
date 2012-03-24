@@ -49,9 +49,8 @@
                 if (get_option('fgp_footer_text')!='') { 
                     echo get_option('fgp_footer_text'); 
                 } else { ?>
-                    All work copyright <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); } ?></a></p>
+                    All Collection copyright <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); } ?></a></p>
         </div>
-        <!-- <p>FolioGrid - a <a href="http://www.frogsthemes.com">Premium Wordpress Theme</a> by FrogsThemes.com</p> -->
 	</div>
 
 

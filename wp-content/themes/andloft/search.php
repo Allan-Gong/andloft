@@ -16,12 +16,12 @@
 			
 					<div class="post-content">
 						<h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
-						<p><?php frog_the_excerpt_reloaded(50, 'none', TRUE, '...', FALSE, 1); ?></p>
+						<p><?php frog_the_excerpt_reloaded(20, 'none', TRUE, '...', FALSE, 1); ?></p>
 					</div>
 			
 					<div class="post-footer">
 						<small>Published on <?php the_time('M d, Y'); ?><br />
-						Filed under: <?php the_category(' | ') ?>
+						Category: <?php the_category(' | ') ?>
 						</small>
 					</div>
 				</div>
@@ -46,13 +46,6 @@
 		 </div>
 	
 		<?php endif; ?>
-			
-		<div class="post copyright">
-			<div>
-			   <p>FolioGrid - a <a href="http://www.frogsthemes.com">Premium Wordpress Theme</a> by FrogsThemes.com</p>
-			</div>
-		</div>
-	
 	</div>
     
 

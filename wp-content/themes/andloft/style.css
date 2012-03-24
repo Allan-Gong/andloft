@@ -43,12 +43,12 @@ Tags:simple, clean, single column, grid, portfolio
 -------------------------------------------------------------------*/
 
 	html, body 					{ font:11px/1.4em Helvetica Neue,Helvetica,Arial,sans-serif; }	
-	body 						{ padding:115px 25px 50px 25px; margin:0; }
+	body 						{ padding:100px 30px 10px 30px; margin:0; }
 
 /* Template
 -------------------------------------------------------------------*/
 
-	#header						{ width:100%; height:70px; position:fixed; top:0; left:0; z-index:100; padding:10px 0 20px 0; overflow:hidden; }
+	#header						{ width:100%; height:70px; position:fixed; top:0; left:0; z-index:100; padding:5px 0 10px 0; overflow:hidden; }
 	#wrapper					{ padding:20px; clear:both; position:relative; z-index:50; top:60px; }
 	#contentwrap				{ position:relative; }
 	#coreContent				{ width:960px; margin:0 auto; padding-top:30px; }
@@ -58,7 +58,7 @@ Tags:simple, clean, single column, grid, portfolio
 /* Header
 -------------------------------------------------------------------*/
 
-	#header div					{ float:left; margin:0; padding:20px 0 18px 30px; text-shadow:none; }
+	#header div					{ float:left; margin:0; padding:15px 0 0 45px; text-shadow:none; }
 	#header form				{ float:left; margin:0; padding:0; }
 	#header h3					{ text-transform:uppercase; padding:0; float:left; margin:0 10px 0 0; font-family:Helvetica Neue,Helvetica,Arial,sans-serif; }
 	#header p					{ padding:0; margin:0; }
@@ -69,13 +69,13 @@ Tags:simple, clean, single column, grid, portfolio
 	#header select 				{ -moz-border-radius:3px; -khtml-border-radius:3px; -webkit-border-radius:3px; padding:4px; margin:-4px 0 0 0; border:0; font:10px/1em Helvetica Neue,Helvetica,Arial,sans-serif; float:left; }
 	#header input				{ width:auto; }
 	
-	#header ul					{ list-style:none; padding:0; margin:0; float:left; }
+	#header ul					{ list-style:none; padding:0; margin:0; float:left; font-size: 16px; }
 	#header ul li				{ float:left; margin:0 0 0 5px; padding:0 0 0 5px; text-transform:lowercase; }
 	#header ul li.first			{ border-left:0; padding:0; margin:0; }
 	
-	.blogInfo					{ text-transform:uppercase; font-weight:bold; line-height:2em; }
+	.blogInfo					{ text-transform:uppercase; font-weight:bold; line-height:2.5em; }
 	.blogInfo a					{ text-transform:capitalize; font-size:36px; color:#fff; }
-	
+
 	#header .stuffing			{ float:right; margin:0 30px 0 0; }
 	
 /* Post
@@ -121,10 +121,10 @@ Tags:simple, clean, single column, grid, portfolio
 
 	.archiveTitle h2			{ font-size:14px; font-style:italic; margin:0; font-family:Helvetica Neue,Helvetica,Arial,sans-serif; }
 	.archiveTitle .currentCat	{ margin:0 0 10px 0; }
-	.archiveTitle .currentCat span	{ font-weight:bold; }
-	.archiveTitle .spaced		{ margin:0 0 30px 0; }
-	.archiveTitle h3			{ font-size:14px; font-style:italic; margin:0 0 20px 0; font-family:Helvetica Neue,Helvetica,Arial,sans-serif; }
-	.archiveTitle ul			{ list-style:none; padding:0; margin:0 0 30px 0; font-style:italic; }
+	.archiveTitle .currentCat span	{ display: block; font-weight:bold; margin: 10px 0 0 20px; }
+	.archiveTitle .spaced		{ margin:0 0 10px 0; }
+	.archiveTitle h3			{ font-size:14px; font-style:italic; margin:0 0 5px 0; font-family:Helvetica Neue,Helvetica,Arial,sans-serif; }
+	.archiveTitle ul			{ list-style:none; padding:0; margin:0 0 15px 0; font-style:italic; }
 	.archiveTitle ul ul			{ margin:0; font-style:italic; }
 	.archiveTitle ul li			{ padding:0 0 0 20px; font-style:italic; }
 	.archiveTitle ul ul	li		{ padding:0; }
@@ -194,7 +194,7 @@ Tags:simple, clean, single column, grid, portfolio
 /* Footer elements
 -------------------------------------------------------------------*/
 
-	#footer						{ padding:30px 0 10px 0; text-transform:uppercase; font-size:0.9em; clear:both; }
+	#footer						{ padding:10px 0 10px 0; text-transform:uppercase; font-size:0.9em; clear:both; }
 	#footer h3					{ text-transform:uppercase; padding:0; float:left; margin:0 10px 0 0; }
 	#footer p					{ padding:0; margin:0; }
 	#footer a					{ font-style:italic; text-transform:capitalize; text-decoration:none; }

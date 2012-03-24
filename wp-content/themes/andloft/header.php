@@ -41,7 +41,7 @@
 		</div>
         <div class="stuffing">
             <div class="pages">
-                <h3>Menu</h3>
+                <!-- <h3>Menu</h3> -->
                 <ul>
                     <li class="first"><a href="<?php bloginfo('url'); ?>">Home</a></li>
                     <?php wp_list_pages('title_li=&depth=1'); ?>
