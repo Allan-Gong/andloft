@@ -247,7 +247,9 @@ if ( ! CUSTOM_TAGS ) {
 		'legend' => array(
 			'align' => array ()),
 		'li' => array (
+			'style' => array (),
 			'align' => array (),
+			'id' => array (),
 			'class' => array ()),
 		'menu' => array (
 			'class' => array (),
@@ -262,6 +264,7 @@ if ( ! CUSTOM_TAGS ) {
 			'xml:lang' => array(),
 		),
 		'p' => array(
+			'id' => array (),
 			'class' => array (),
 			'align' => array (),
 			'dir' => array(),
@@ -388,6 +391,7 @@ if ( ! CUSTOM_TAGS ) {
 			'style' => array (),
 			'type' => array ()),
 		'ol' => array (
+			'id' => array (),
 			'class' => array (),
 			'start' => array (),
 			'style' => array (),

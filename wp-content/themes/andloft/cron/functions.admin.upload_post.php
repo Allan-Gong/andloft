@@ -21,6 +21,10 @@ require_once( ABSPATH . 'wp-includes/post.php' );
 
 */
 
+function get_html_none_displayable_content($content_string) {
+  return '<p class="none_display">' . $content_string . '</p>';
+}
+
 function delete_post($post_id, $reason='No reason provided!') {
   wp_delete_post( $post_id, false );
 
@@ -66,14 +70,28 @@ function upload_image_post(
     return false;
   }
 
-  $post_content =
+  $updated_post_content =
       '<div style="overflow: auto;">' . $post_image_html_tag . '</div>'
-    . '<p>' . $post_content . '</p>'
+    . get_html_none_displayable_content($post_content)
   ;
+
+  global $allowedposttags;
+
+  $allowedposttags['div'] = array(
+    'class' => array (), 
+    'id'    => array (),  
+    'style' => array (), 
+  );
+
+  $allowedposttags['p'] = array( 
+    'class' => array (), 
+    'id'    => array (), 
+    'style' => array (), 
+  );
 
   $post_id = wp_update_post( array(
     'ID'           => $post_id,
-    'post_content' => $post_content,
+    'post_content' => $updated_post_content,
   ));
 
   if ( !$post_id ) {
@@ -115,11 +133,6 @@ function upload_image_post(
     return false;
   }
 
-  // $post_id = wp_update_post( array(
-  //   'ID'          => $post_id,
-  //   'post_status' => 'publish',
-  // ));
-
   if ( !$post_id ) {
     delete_post($post_id, "if ( !$post_id )");
     return false;
@@ -148,6 +161,38 @@ function get_random_post_column() {
 function update_image_post_title_and_add_content($post_id, $title, $added_content) {
 
   $post = get_post($post_id);
+
+  global $allowedposttags;
+
+  $allowedposttags['div'] = array(
+    //'align'    => array (), 
+    'class'    => array (), 
+    'id'       => array (), 
+    //'dir'      => array (), 
+    //'lang'     => array(), 
+    'style'    => array (), 
+    //'xml:lang' => array(),
+  );
+
+  $allowedposttags['ol'] = array(
+    //'align'    => array (), 
+    'class'    => array (), 
+    'id'       => array (), 
+    //'dir'      => array (), 
+    //'lang'     => array(), 
+    'style'    => array (), 
+    //'xml:lang' => array(),
+  );
+
+  $allowedposttags['p'] = array(
+    //'align'    => array (), 
+    'class'    => array (), 
+    'id'       => array (), 
+    //'dir'      => array (), 
+    //'lang'     => array(), 
+    'style'    => array (), 
+    //'xml:lang' => array(),
+  );
 
   $post_id = wp_update_post( array(
     'ID'           => $post_id,

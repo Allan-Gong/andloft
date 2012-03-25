@@ -12,12 +12,12 @@ require_once( 'functions.admin.google_search_by_image_upload.php' );
 
 global $wpdb;
 
-$WEIBOs = array(
-	array(
-		'weibo_id' => '1657430300',    //创意工坊
-		'tags'     => array('design'),
-	),
-);
+// $WEIBOs = array(
+// 	array(
+// 		'weibo_id' => '1657430300',    //创意工坊
+// 		'tags'     => array('design'),
+// 	),
+// );
 
 // foreach ($WEIBOs as $WEIBO) {
 // 	var_dump($WEIBO);
@@ -63,7 +63,7 @@ function get_all_of_latest_image_weibo() {
 
 	$result_array = array();
 
-	foreach ($$WEIBO_IDs as $weibo_id) {
+	foreach ($WEIBO_IDs as $weibo_id) {
 		array_push($result_array, get_image_posts_by_weibo_id());
 	}
 
@@ -81,7 +81,7 @@ function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 	$post_data['source']   = '2365217913';
 	$post_data['user_id']  = $weibo_id;
 	$post_data['feature']  = '0';
-	$post_data['count']    = '50';
+	$post_data['count']    = '5';
 	$post_data['base_app'] = '0';
 
 	if ( $since_id ) {
@@ -209,9 +209,17 @@ function get_post_attached_image_file_path($post_id) {
 function cron_job() {
 
 	$WEIBOs = array(
+		// array(
+		// 	'weibo_id' => '1657430300',    //创意工坊
+		// 	'tags'     => array('design'),
+		// ),
+		// array(
+		// 	'weibo_id' => '1628951200',    //创意铺子
+		// 	'tags'     => array('design'),
+		// ),
 		array(
-			'weibo_id' => '1657430300',    //创意工坊
-			'tags'     => array('design'),
+			'weibo_id' => '2143579695',    //全球顶尖摄影
+			'tags'     => array('photography','art'),
 		),
 	);
 
@@ -238,7 +246,7 @@ function cron_job() {
 				$post_id = upload_image_post(
 					'No title yet',                                         // post title
 					'weibo_image_post',                                     // post name
-					$weibo_post['text'],                                    // post content
+					$weibo_post['text'], // post content
 					array(1),                                               // post category
 					array_merge( array('weibo'), $weibo_array['tags'] ),    // post tags
 					$weibo_post['original_pic'],                            // image url
@@ -252,11 +260,11 @@ function cron_job() {
 
 					$google_search_by_image_result = google_search_by_image_upload($image_absolute_path);
 
+// print_r($google_search_by_image_result['google_search_result_html']);
+
 					$post_id = update_image_post_title_and_add_content(
 						$post_id,
 						$google_search_by_image_result['image_title'],
-						// generate_google_search_by_image_content($google_search_by_image_result['image_url'])
-						// generate_google_search_by_image_form($image_absolute_path) . generate_legal_text()
 						$google_search_by_image_result['google_search_result_html'] . generate_legal_text()
 					);
 

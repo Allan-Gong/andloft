@@ -22,8 +22,8 @@ get_header(); ?>
     </div>
     
     <div class="pagination clearfix">
-        <div class="prevpost"><?php previous_post_link('%link') ?></div>
-        <div class="nextpost"><?php next_post_link('%link') ?></div>
+        <div class="prevpost"><?php previous_post_link('%link','&laquo; Previous',false) ?></div>
+        <div class="nextpost"><?php next_post_link('%link','Next &raquo;',false) ?></div>
     </div>
     
    <div class="singlepost clearfix">
