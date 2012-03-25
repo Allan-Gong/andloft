@@ -81,7 +81,7 @@ function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 	$post_data['source']   = '2365217913';
 	$post_data['user_id']  = $weibo_id;
 	$post_data['feature']  = '0';
-	$post_data['count']    = '5';
+	$post_data['count']    = '10';
 	$post_data['base_app'] = '0';
 
 	if ( $since_id ) {
