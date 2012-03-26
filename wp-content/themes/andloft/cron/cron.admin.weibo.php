@@ -80,7 +80,7 @@ function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 
 	$post_data['source']   = '2365217913';
 	$post_data['user_id']  = $weibo_id;
-	$post_data['feature']  = '0';
+	$post_data['feature']  = '1';
 	$post_data['count']    = '10';
 	$post_data['base_app'] = '0';
 
@@ -209,17 +209,53 @@ function get_post_attached_image_file_path($post_id) {
 function cron_job() {
 
 	$WEIBOs = array(
-		// array(
-		// 	'weibo_id' => '1657430300',    //创意工坊
-		// 	'tags'     => array('design'),
-		// ),
-		// array(
-		// 	'weibo_id' => '1628951200',    //创意铺子
-		// 	'tags'     => array('design'),
-		// ),
+		array(
+			'weibo_id' => '1657430300',    //创意工坊
+			'tags'     => array('design'),
+		),
+		array(
+			'weibo_id' => '1628951200',    //创意铺子
+			'tags'     => array('design'),
+		),
 		array(
 			'weibo_id' => '2143579695',    //全球顶尖摄影
 			'tags'     => array('photography','art'),
+		),
+		array(
+			'weibo_id' => '1746316033',    //堆糖网
+			'tags'     => array('image','art','design'),
+		),
+		array(
+			'weibo_id' => '1858319430',    //环球时尚家居
+			'tags'     => array('fashion','furniture'),
+		),
+		array(
+			'weibo_id' => '1966380590',    //环球家居
+			'tags'     => array('fashion','furniture'),
+		),
+		array(
+			'weibo_id' => '1756434105',    //创意家居
+			'tags'     => array('fashion','furniture','design'),
+		),
+		array(
+			'weibo_id' => '2141098287',    //爱旅行爱幻想
+			'tags'     => array('travel'),
+		),
+		array(
+			'weibo_id' => '1832447572',    //一块去旅行
+			'tags'     => array('travel'),
+		),
+		array(
+			'weibo_id' => '1658364043',    //全球创意搜罗
+			'tags'     => array('design'),
+		),
+		array(
+			'weibo_id' => '1802393212',    //收录唯美图片
+			'tags'     => array('picture','aesthetic'),
+		),
+		array(
+			'weibo_id' => '1992523932',    //美食工场
+			'tags'     => array('gourmet'),
 		),
 	);
 
