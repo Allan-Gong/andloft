@@ -241,8 +241,8 @@
                           preload         : false,
                           nextSelector    : "div.navigation a:first",
                           loadingImg      : "http://www.infinite-scroll.com/loading.gif",
-                          loadingText     : "<em>Loading the next set of posts...</em>",
-                          donetext        : "<em>Congratulations, you've reached the end of the internet.</em>",
+                          loadingText     : "<em>Loading the next set of collections...</em>",
+                          donetext        : "<em>You've reached the end of the collections...</em>",
                           navSelector     : "div.navigation",
                           contentSelector : null,           // not really a selector. :) it's whatever the method was called on..
                           extraScrollPx   : 150,
