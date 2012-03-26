@@ -2,7 +2,10 @@
 
 set_time_limit(0);
 
-error_reporting(-1);
+// error_reporting(-1);
+// ini_set('display_errors', 0);
+// ini_set('log_errors', 1);
+
 
 require_once( '../../../../wp-load.php' );
 require_once( ABSPATH . 'wp-includes/post.php' );
@@ -279,74 +282,85 @@ function cron_job() {
 		),
 	);
 
-	error_reporting(-1);
-
-	// var_dump($WEIBOs);
+	// error_reporting(-1);
+	// ini_set('display_errors', 0);
+	// ini_set('log_errors', 1);
 
 	foreach ( $WEIBOs as $weibo_array ) {
-		$latest_weibo_mid = get_latest_weibo_mid_by_weibo_id($weibo_array['weibo_id']);
+		
+		try {
 
-		logInfo('$latest_weibo_mid: ' . $latest_weibo_mid );
+			$latest_weibo_mid = get_latest_weibo_mid_by_weibo_id($weibo_array['weibo_id']);
 
-		// if ( !$latest_weibo_mid ) {
-		// 	continue;
-		// }
+			logInfo('$latest_weibo_mid: ' . $latest_weibo_mid );
 
-		$result_weibo_array = get_image_posts_by_weibo_id($weibo_array['weibo_id'], $latest_weibo_mid);
+			$result_weibo_array = get_image_posts_by_weibo_id($weibo_array['weibo_id'], $latest_weibo_mid);
 
-		//var_dump($result_weibo_array); break;
+			//var_dump($result_weibo_array); break;
 
-		if ( !empty($result_weibo_array) ) {
-			foreach ( $result_weibo_array as $weibo_post ) {
+			if ( !empty($result_weibo_array) ) {
 
-				$post_id = upload_image_post(
-					'No title yet',                                         // post title
-					'weibo_image_post',                                     // post name
-					$weibo_post['text'], // post content
-					array(1),                                               // post category
-					array_merge( array('weibo'), $weibo_array['tags'] ),    // post tags
-					$weibo_post['original_pic'],                            // image url
-					NULL                                                    // image description
-				);
+				foreach ( $result_weibo_array as $weibo_post ) {
 
-				if ( $post_id ) {
-					$post_id = add_weibo_meta_data_to_post( $post_id, $weibo_array['weibo_id'], $weibo_post['mid'] );
+					try {
 
-					$image_absolute_path = get_post_attached_image_file_path($post_id);
+						$post_id = upload_image_post(
+							'No title yet',                                         // post title
+							'weibo_image_post',                                     // post name
+							$weibo_post['text'], // post content
+							array(1),                                               // post category
+							array_merge( array('weibo'), $weibo_array['tags'] ),    // post tags
+							$weibo_post['original_pic'],                            // image url
+							NULL                                                    // image description
+						);
 
-					$google_search_by_image_result = google_search_by_image_upload($image_absolute_path);
+						if ( $post_id ) {
+							$post_id = add_weibo_meta_data_to_post( $post_id, $weibo_array['weibo_id'], $weibo_post['mid'] );
 
-// print_r($google_search_by_image_result['google_search_result_html']);
+							$image_absolute_path = get_post_attached_image_file_path($post_id);
 
-					$post_id = update_image_post_title_and_add_content(
-						$post_id,
-						$google_search_by_image_result['image_title'],
-						$google_search_by_image_result['google_search_result_html'] . generate_legal_text()
-					);
+							$google_search_by_image_result = google_search_by_image_upload($image_absolute_path);
 
-					if ( $google_search_by_image_result['image_title'] !== 'No title yet' ) {
-						logInfo('publishing post - post_id: ' . $post_id );
-						$post_id = wp_update_post( array(
-							'ID'          => $post_id,
-							'post_status' => 'publish',
-						));
+							$post_id = update_image_post_title_and_add_content(
+								$post_id,
+								$google_search_by_image_result['image_title'],
+								$google_search_by_image_result['google_search_result_html'] . generate_legal_text()
+							);
 
-					} else {
-						logInfo('Pending post - post_id: ' . $post_id );
-						$post_id = wp_update_post( array(
-							'ID'          => $post_id,
-							'post_status' => 'pending',
-						));
+							if ( $google_search_by_image_result['image_title'] !== 'No title yet' ) {
+								logInfo('publishing post - post_id: ' . $post_id );
+								$post_id = wp_update_post( array(
+									'ID'          => $post_id,
+									'post_status' => 'publish',
+								));
+
+							} else {
+								logInfo('Pending post - post_id: ' . $post_id );
+								$post_id = wp_update_post( array(
+									'ID'          => $post_id,
+									'post_status' => 'pending',
+								));
+							}
+
+							sleep(10);
+						}
+
+					} catch (Exception $e) {
+						logError($e->getMessage());
+						continue;
 					}
 
-					sleep(10);
-				}
+				} // foreach ( $result_weibo_array as $weibo_post ) {
+			} else {
+				logInfo("No new original weibo post found for weibo id {$weibo_array['weibo_id']}");
 			}
-		} else {
-			logInfo("No new original weibo post found for weibo id {$weibo_array['weibo_id']}");
-		}
 
-		sleep(10);
+			sleep(10);
+
+		} catch (Exception $e) {
+			logError($e->getMessage());
+			continue;
+		}
 
 	} // foreach ( $WEIBOs as $weibo_array ) {
 
