@@ -36,6 +36,16 @@ global $wpdb;
 // $result_weibo_array = get_image_posts_by_weibo_id('1657430300');
 // var_dump($result_weibo_array);
 
+function logError($error_string) {
+
+	global $daily_file_logger;
+
+	$daily_file_logger->error($error_string);
+
+	print 'ERROR: ' . $error_string . '<br />';
+
+}
+
 function logInfo($info_string) {
 	
 	global $daily_file_logger;
@@ -128,35 +138,48 @@ function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 
 	$result_post_array = array();
 
+	if ( !is_array($weibo_data_array) ) {
+		return $result_post_array;
+	}
+
 	foreach ( $weibo_data_array as $weibo_data_array_item ) {
-		$result_post_array_item = array();
+		
+		try {
 
-		if ( !is_array($weibo_data_array_item) ) {
+			$result_post_array_item = array();
+
+			if ( !is_array($weibo_data_array_item) ) {
+				continue;
+			}
+
+			$is_original_image_weibo = (
+					!array_key_exists('retweeted_status', $weibo_data_array_item)
+				and array_key_exists('original_pic', $weibo_data_array_item)
+			);
+
+			if ( ! $is_original_image_weibo ) {
+
+				continue;
+			}
+
+			$result_post_array_item['mid']          = $weibo_data_array_item['mid'];
+			$result_post_array_item['original_pic'] = $weibo_data_array_item['original_pic'];
+
+			if ( array_key_exists('text', $weibo_data_array_item) ) {
+				$result_post_array_item['text'] = $weibo_data_array_item['text'];
+			}
+
+			if ( array_key_exists('created_at', $weibo_data_array_item) ) {
+				$result_post_array_item['created_at'] = $weibo_data_array_item['created_at'];
+			}
+
+			array_push($result_post_array, $result_post_array_item);
+	
+		} catch (Exception $e) {
+			logError($e->getMessage());
 			continue;
 		}
 
-		$is_original_image_weibo = (
-				!array_key_exists('retweeted_status', $weibo_data_array_item)
-			and array_key_exists('original_pic', $weibo_data_array_item)
-		);
-
-		if ( ! $is_original_image_weibo ) {
-
-			continue;
-		}
-
-		$result_post_array_item['mid']          = $weibo_data_array_item['mid'];
-		$result_post_array_item['original_pic'] = $weibo_data_array_item['original_pic'];
-
-		if ( array_key_exists('text', $weibo_data_array_item) ) {
-			$result_post_array_item['text'] = $weibo_data_array_item['text'];
-		}
-
-		if ( array_key_exists('created_at', $weibo_data_array_item) ) {
-			$result_post_array_item['created_at'] = $weibo_data_array_item['created_at'];
-		}
-
-		array_push($result_post_array, $result_post_array_item);	
 	}
 
 	return $result_post_array;
