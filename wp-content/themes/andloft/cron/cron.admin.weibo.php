@@ -6,9 +6,16 @@ error_reporting(-1);
 
 require_once( '../../../../wp-load.php' );
 require_once( ABSPATH . 'wp-includes/post.php' );
+require_once( ABSPATH . 'wp-includes/theme.php' );
 
 require_once( 'functions.admin.upload_post.php' );
 require_once( 'functions.admin.google_search_by_image_upload.php' );
+
+require_once( get_theme_root() . '/andloft/libs/includes/log4php/Logger.php' );
+
+Logger::configure('log4php_config.xml');
+
+$daily_file_logger = Logger::getLogger('weibo_cron_daily_logger');
 
 global $wpdb;
 
@@ -25,6 +32,15 @@ global $wpdb;
 
 // $result_weibo_array = get_image_posts_by_weibo_id('1657430300');
 // var_dump($result_weibo_array);
+
+function logInfo($info_string) {
+	
+	global $daily_file_logger;
+
+	$daily_file_logger->info($info_string);
+
+	print $info_string;
+}
 
 function get_latest_weibo_mid_by_weibo_id ($weibo_id) {
 
@@ -266,7 +282,7 @@ function cron_job() {
 	foreach ( $WEIBOs as $weibo_array ) {
 		$latest_weibo_mid = get_latest_weibo_mid_by_weibo_id($weibo_array['weibo_id']);
 
-		print '$latest_weibo_mid: ' . $latest_weibo_mid . '<br />';
+		logInfo(date('D M j G:i:s Y') . ' - $latest_weibo_mid: ' . $latest_weibo_mid . '<br />');
 
 		// if ( !$latest_weibo_mid ) {
 		// 	continue;
@@ -305,14 +321,14 @@ function cron_job() {
 					);
 
 					if ( $google_search_by_image_result['image_title'] !== 'No title yet' ) {
-						print date('D M j G:i:s Y') . ' - publishing post - post_id: ' . $post_id . '<br />';
+						logInfo(date('D M j G:i:s Y') . ' - publishing post - post_id: ' . $post_id . '<br />');
 						$post_id = wp_update_post( array(
 							'ID'          => $post_id,
 							'post_status' => 'publish',
 						));
 
 					} else {
-						print date('D M j G:i:s Y') . ' - Pending post - post_id: ' . $post_id . '<br />';
+						logInfo(date('D M j G:i:s Y') . ' - Pending post - post_id: ' . $post_id . '<br />');
 						$post_id = wp_update_post( array(
 							'ID'          => $post_id,
 							'post_status' => 'pending',
@@ -323,7 +339,7 @@ function cron_job() {
 				}
 			}
 		} else {
-			print "No new original weibo post found for weibo id {$weibo_array['weibo_id']} <br />";
+			logInfo("No new original weibo post found for weibo id {$weibo_array['weibo_id']} <br />");
 		}
 
 		sleep(10);
@@ -334,6 +350,6 @@ function cron_job() {
 
 cron_job();
 
-
+logInfo('--------------------------------');
 
 ?>
