@@ -131,6 +131,10 @@ function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 	foreach ( $weibo_data_array as $weibo_data_array_item ) {
 		$result_post_array_item = array();
 
+		if ( !is_array($weibo_data_array_item) ) {
+			continue;
+		}
+
 		$is_original_image_weibo = (
 				!array_key_exists('retweeted_status', $weibo_data_array_item)
 			and array_key_exists('original_pic', $weibo_data_array_item)
@@ -362,9 +366,11 @@ function cron_job() {
 			continue;
 		}
 
+	logInfo("=====================================");
+
 	} // foreach ( $WEIBOs as $weibo_array ) {
 
-	logInfo("=====================================");
+	
 }
 
 cron_job();
