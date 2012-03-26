@@ -286,7 +286,7 @@ function cron_job() {
 	foreach ( $WEIBOs as $weibo_array ) {
 		$latest_weibo_mid = get_latest_weibo_mid_by_weibo_id($weibo_array['weibo_id']);
 
-		logInfo(date('D M j G:i:s Y') . ' - $latest_weibo_mid: ' . $latest_weibo_mid );
+		logInfo(' - $latest_weibo_mid: ' . $latest_weibo_mid );
 
 		// if ( !$latest_weibo_mid ) {
 		// 	continue;
@@ -325,14 +325,14 @@ function cron_job() {
 					);
 
 					if ( $google_search_by_image_result['image_title'] !== 'No title yet' ) {
-						logInfo(date('D M j G:i:s Y') . ' - publishing post - post_id: ' . $post_id );
+						logInfo(' - publishing post - post_id: ' . $post_id );
 						$post_id = wp_update_post( array(
 							'ID'          => $post_id,
 							'post_status' => 'publish',
 						));
 
 					} else {
-						logInfo(date('D M j G:i:s Y') . ' - Pending post - post_id: ' . $post_id );
+						logInfo(' - Pending post - post_id: ' . $post_id );
 						$post_id = wp_update_post( array(
 							'ID'          => $post_id,
 							'post_status' => 'pending',
