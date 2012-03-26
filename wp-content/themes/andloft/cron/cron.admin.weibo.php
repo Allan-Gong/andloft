@@ -39,7 +39,7 @@ function logInfo($info_string) {
 
 	$daily_file_logger->info($info_string);
 
-	print $info_string;
+	print $info_string . '<br />';
 }
 
 function get_latest_weibo_mid_by_weibo_id ($weibo_id) {
@@ -269,9 +269,13 @@ function cron_job() {
 			'weibo_id' => '1802393212',    //收录唯美图片
 			'tags'     => array('picture','aesthetic'),
 		),
+		// array(
+		// 	'weibo_id' => '1992523932',    //美食工场
+		// 	'tags'     => array('gourmet'),
+		// ),
 		array(
-			'weibo_id' => '1992523932',    //美食工场
-			'tags'     => array('gourmet'),
+			'weibo_id' => '1757142323',    //海外美食家
+			'tags'     => array('gourmet',),
 		),
 	);
 
@@ -282,7 +286,7 @@ function cron_job() {
 	foreach ( $WEIBOs as $weibo_array ) {
 		$latest_weibo_mid = get_latest_weibo_mid_by_weibo_id($weibo_array['weibo_id']);
 
-		logInfo(date('D M j G:i:s Y') . ' - $latest_weibo_mid: ' . $latest_weibo_mid . '<br />');
+		logInfo(date('D M j G:i:s Y') . ' - $latest_weibo_mid: ' . $latest_weibo_mid );
 
 		// if ( !$latest_weibo_mid ) {
 		// 	continue;
@@ -321,14 +325,14 @@ function cron_job() {
 					);
 
 					if ( $google_search_by_image_result['image_title'] !== 'No title yet' ) {
-						logInfo(date('D M j G:i:s Y') . ' - publishing post - post_id: ' . $post_id . '<br />');
+						logInfo(date('D M j G:i:s Y') . ' - publishing post - post_id: ' . $post_id );
 						$post_id = wp_update_post( array(
 							'ID'          => $post_id,
 							'post_status' => 'publish',
 						));
 
 					} else {
-						logInfo(date('D M j G:i:s Y') . ' - Pending post - post_id: ' . $post_id . '<br />');
+						logInfo(date('D M j G:i:s Y') . ' - Pending post - post_id: ' . $post_id );
 						$post_id = wp_update_post( array(
 							'ID'          => $post_id,
 							'post_status' => 'pending',
@@ -339,13 +343,14 @@ function cron_job() {
 				}
 			}
 		} else {
-			logInfo("No new original weibo post found for weibo id {$weibo_array['weibo_id']} <br />");
+			logInfo("No new original weibo post found for weibo id {$weibo_array['weibo_id']}");
 		}
 
 		sleep(10);
 
 	} // foreach ( $WEIBOs as $weibo_array ) {
 
+	logInfo("=====================================");
 }
 
 cron_job();
