@@ -366,9 +366,11 @@ function cron_job() {
 			continue;
 		}
 
+		logInfo("=====================================");
+
 	} // foreach ( $WEIBOs as $weibo_array ) {
 
-	logInfo("=====================================");
+
 }
 
 cron_job();
