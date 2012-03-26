@@ -3,8 +3,8 @@
 set_time_limit(0);
 
 // error_reporting(-1);
-// ini_set('display_errors', 0);
-// ini_set('log_errors', 1);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
 
 require_once( '../../../../wp-load.php' );
@@ -283,8 +283,8 @@ function cron_job() {
 	);
 
 	// error_reporting(-1);
-	// ini_set('display_errors', 0);
-	// ini_set('log_errors', 1);
+	ini_set('display_errors', 0);
+	ini_set('log_errors', 1);
 
 	foreach ( $WEIBOs as $weibo_array ) {
 		
