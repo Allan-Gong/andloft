@@ -88,16 +88,6 @@ function get_latest_weibo_mid_by_weibo_id ($weibo_id) {
 	return $weibo_mid;
 }
 
-function get_all_of_latest_image_weibo() {
-
-	$result_array = array();
-
-	foreach ($WEIBO_IDs as $weibo_id) {
-		array_push($result_array, get_image_posts_by_weibo_id());
-	}
-
-}
-
 function get_image_posts_by_weibo_id($weibo_id, $since_id = 0){
 
 	$username = 'hgon23@gmail.com';       
@@ -399,5 +389,7 @@ function cron_job() {
 cron_job();
 
 logInfo('--------------------------------');
+logInfo('                                ');
+logInfo('                                ');
 
 ?>
