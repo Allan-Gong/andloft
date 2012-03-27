@@ -31,4 +31,15 @@
 
 		<?php endif; ?>
 	</div>
+
+	<?php global $user_ID; if( $user_ID ) : ?>
+		<?php if( current_user_can('level_10') ) : ?>
+		<div class="sidebar_admin widget">
+			<span class="widget-title" style="color:red;">Admin</span>
+			<p>Post ID: <strong><?php the_ID(); ?></strong></p>
+			<p><a href="<?php echo get_admin_url(); ?>post.php?post=<?php the_ID(); ?>&action=edit">Edit this post</a></p>
+		</div>
+		<?php endif; ?>
+	<?php endif; ?>
+
 </div>

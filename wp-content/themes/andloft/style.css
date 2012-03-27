@@ -191,6 +191,8 @@ Tags:simple, clean, single column, grid, portfolio
 	.widget-title				{ font-size:1.2em; font-weight:bold; display:block; margin:0 0 10px 0; }
 	div.widget					{ margin:0 0 2.5em 0; line-height:1.4em; border:0; padding:10px; margin:0 0 10px 0; }
 
+	#sidebar .sidebar_admin p   { margin: 0; }
+
 /* Footer elements
 -------------------------------------------------------------------*/
 
