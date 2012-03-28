@@ -1,5 +1,12 @@
 <?php
 
+// prevent cron script to be accessed from outside this server
+if ( isset($_SERVER['REMOTE_ADDR']) ) {
+
+	die('Permission denied.'); 
+
+} 
+
 set_time_limit(0);
 
 // error_reporting(-1);
@@ -359,7 +366,7 @@ function cron_job() {
 								));
 							}
 
-							sleep(10);
+							sleep(20);
 						}
 
 					} catch (Exception $e) {
@@ -372,7 +379,7 @@ function cron_job() {
 				logInfo("No new original weibo post found for weibo id {$weibo_array['weibo_id']}");
 			}
 
-			sleep(10);
+			sleep(30);
 
 		} catch (Exception $e) {
 			logError($e->getMessage());
