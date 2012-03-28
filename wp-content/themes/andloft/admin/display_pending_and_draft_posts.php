@@ -69,8 +69,16 @@ $pending_posts = get_posts(array(
 	'order'       => 'ASC',
 ));
 
-if ( empty($pending_posts) ) {
-	echo 'No pending post found!';
+$draft_posts = get_posts(array(
+	'post_status' => 'draft',
+	'numberposts' => 1000,
+	'order'       => 'ASC',
+));
+
+$posts = array_merge($pending_posts, $draft_posts);
+
+if ( empty($posts) ) {
+	echo 'No pending/draft post found!';
 	return;
 }
 
@@ -78,7 +86,7 @@ if ( empty($pending_posts) ) {
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 
-	<?php foreach ( $pending_posts as $pending_post ) : ?>
+	<?php foreach ( $posts as $post ) : ?>
 
 		<table border="2" style="width: 100%; height:100px; table-layout: fixed; margin-bottom: 2em; ">
 			<tr>
@@ -90,18 +98,18 @@ if ( empty($pending_posts) ) {
 			</tr>
 			<tr valign="middle" align="center">
 				<td>
-					<?php echo $pending_post->ID ?>
-					<input type="hidden" name="post[<?php echo $pending_post->ID ?>][ID]" value="<?php echo $pending_post->ID ?>" />
+					<?php echo $post->ID ?>
+					<input type="hidden" name="post[<?php echo $post->ID ?>][ID]" value="<?php echo $post->ID ?>" />
 				</td>
 				<td>
 					<div style="width:500px; height:200px; overflow: auto;">
-						<?php echo $pending_post->post_content ?>
+						<?php echo $post->post_content ?>
 					</div>
 				</td>
-				<td><?php echo $pending_post->post_title ?></td>
-				<td><input type="text" name="post[<?php echo $pending_post->ID ?>][title]" value="" size="35" /></td>
-				<td><input id="id_publish_<?php echo $pending_post->ID ?>" type="radio" name="post[<?php echo $pending_post->ID ?>][action]" value="publish" /> <label for="id_publish_<?php echo $pending_post->ID ?>">Publish</label></td>
-				<td><input id="id_trash_<?php echo $pending_post->ID ?>" type="radio" name="post[<?php echo $pending_post->ID ?>][action]" value="trash" /> <label for="id_trash_<?php echo $pending_post->ID ?>">Trash</label></td>
+				<td><?php echo $post->post_title ?></td>
+				<td><input type="text" name="post[<?php echo $post->ID ?>][title]" value="" size="35" /></td>
+				<td><input id="id_publish_<?php echo $post->ID ?>" type="radio" name="post[<?php echo $post->ID ?>][action]" value="publish" /> <label for="id_publish_<?php echo $post->ID ?>">Publish</label></td>
+				<td><input id="id_trash_<?php echo $post->ID ?>" type="radio" name="post[<?php echo $post->ID ?>][action]" value="trash" /> <label for="id_trash_<?php echo $post->ID ?>">Trash</label></td>
 			</tr>
 		</table>
 	<?php endforeach; ?>
