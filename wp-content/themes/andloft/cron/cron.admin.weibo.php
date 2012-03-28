@@ -1,11 +1,13 @@
 <?php
 
 // prevent cron script to be accessed from outside this server
-if ( isset($_SERVER['REMOTE_ADDR']) ) {
 
-	die('Permission denied.'); 
+$whitelist = array('localhost', '127.0.0.1');
 
-} 
+if(!in_array($_SERVER['HTTP_HOST'], $whitelist)){
+    // not valid
+    die('Permission denied.'); 
+}
 
 set_time_limit(0);
 
