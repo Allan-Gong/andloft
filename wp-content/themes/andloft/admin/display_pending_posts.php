@@ -63,7 +63,11 @@ if ( $_POST['submit'] ) {
 	print 'Finish processing pending posts<br />';
 }
 
-$pending_posts = get_posts(array('post_status' => 'pending'));
+$pending_posts = get_posts(array(
+	'post_status' => 'pending',
+	'numberposts' => 1000,
+	'order'       => 'ASC',
+));
 
 if ( empty($pending_posts) ) {
 	echo 'No pending post found!';

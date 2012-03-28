@@ -61,7 +61,11 @@ function logInfo($info_string) {
 
 function remove_trashed_posts_and_unattached_attachments() {
 
-	$trashed_posts = get_posts(array('post_status' => 'trash'));
+	$trashed_posts = get_posts(array(
+		'post_status' => 'trash',
+		'numberposts' => 1000,
+		'order'       => 'ASC',
+	));
 
 	if ( !empty( $trashed_posts ) ) {
 		foreach ($trashed_posts as $post) {
@@ -80,7 +84,6 @@ function remove_trashed_posts_and_unattached_attachments() {
 	// remove unattached image attachments
 	$unattached_image_attachments = get_posts(array(
 		'post_type'    => 'attachment',
-		 'numberposts' => null,
 		 'post_status' => null,
 		 'post_parent' => 0,
 		 'numberposts' => 1000,
