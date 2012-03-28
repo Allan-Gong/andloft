@@ -37,7 +37,7 @@ require_once( 'functions.admin.google_search_by_image_upload.php' );
 
 require_once( get_theme_root() . '/andloft/libs/includes/log4php/Logger.php' );
 
-Logger::configure('log4php_config.xml');
+Logger::configure('log4php_config_cron_weibo.xml');
 
 $daily_file_logger = Logger::getLogger('weibo_cron_daily_logger');
 
@@ -410,7 +410,6 @@ function cron_job() {
 cron_job();
 
 logInfo('--------------------------------');
-logInfo('                                ');
 logInfo('                                ');
 
 ?>

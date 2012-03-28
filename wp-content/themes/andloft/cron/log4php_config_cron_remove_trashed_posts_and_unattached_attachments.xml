@@ -1,0 +1,11 @@
+<configuration xmlns="http://logging.apache.org/log4php/">
+    <appender name="dailyFileAppender" class="LoggerAppenderDailyFile">
+        <layout class="LoggerLayoutTTCC" />
+        <param name="file" value="trash_logs/file-%s.log" />
+        <param name="datePattern" value="Y-m-d" />
+    </appender>
+    <root>
+        <appender_ref ref="dailyFileAppender" />
+    </root>
+</configuration>
+
