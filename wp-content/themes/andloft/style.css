@@ -58,7 +58,8 @@ Tags:simple, clean, single column, grid, portfolio
 /* Header
 -------------------------------------------------------------------*/
 
-	#header div					{ float:left; margin:0; padding:15px 0 0 45px; text-shadow:none; }
+	#header div					{ float:left; margin:0; padding:15px 0 0 15px; text-shadow:none; }
+	#header div.pages			{ margin: 0 2em 0 0; }
 	#header form				{ float:left; margin:0; padding:0; }
 	#header h3					{ text-transform:uppercase; padding:0; float:left; margin:0 10px 0 0; font-family:Helvetica Neue,Helvetica,Arial,sans-serif; }
 	#header p					{ padding:0; margin:0; }
@@ -70,7 +71,7 @@ Tags:simple, clean, single column, grid, portfolio
 	#header input				{ width:auto; }
 	
 	#header ul					{ list-style:none; padding:0; margin:0; float:left; font-size: 16px; }
-	#header ul li				{ float:left; margin:0 0 0 5px; padding:0 0 0 5px; text-transform:lowercase; }
+	#header ul li				{ float:left; margin:0 0 0 5px; padding:0 0 0 5px; /*text-transform:uppercase;*/ }
 	#header ul li.first			{ border-left:0; padding:0; margin:0; }
 	
 	.blogInfo					{ text-transform:uppercase; font-weight:bold; line-height:2.5em; }
@@ -93,6 +94,8 @@ Tags:simple, clean, single column, grid, portfolio
 	#coreContent h3				{ font-size:18px; }
 	#coreContent h4				{ font-size:14px; }
 	
+	#postwrapper                { width: 80%; margin-left: 10%; }
+
 	.post 						{ width:200px; padding:10px; margin:0 10px 10px 0; overflow:hidden; -moz-border-radius:8px; -khtml-border-radius:8px; -webkit-border-radius:8px; position:absolute; -webkit-box-shadow:1px 1px 3px rgba(0,0,0,0.2); -moz-box-shadow:1px 1px 3px rgba(0,0,0,0.2); box-shadow:1px 1px 3px rgba(0,0,0,0.2); }
 	.twocols					{ width:430px; }
 	.threecols					{ width:660px; }
@@ -129,7 +132,7 @@ Tags:simple, clean, single column, grid, portfolio
 	.archiveTitle ul li			{ padding:0 0 0 20px; font-style:italic; }
 	.archiveTitle ul ul	li		{ padding:0; }
 	.archiveTitle p				{ margin:0 0 30px 0; }
-	.archiveTitle .back			{ margin:0; }
+	.archiveTitle .back			{ margin:1em 0 0 0; }
 	
 	.alignleft					{ float:left; margin:0 30px 30px 0; }	
 	.alignright					{ float:right; margin:0 0 30px 30px; }

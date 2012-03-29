@@ -14,7 +14,8 @@
 jQuery(window).load(function(){
 	
 	jQuery('#postwrapper').masonry({ 
-		columnWidth: 10, 
+		columnWidth: 10,
+  		isFitWidth: true,
 		itemSelector: '.post'
 	});
 
@@ -47,15 +48,28 @@ jQuery(window).load(function(){
 </script>	
 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/foliogrid.js"></script>
+
 <script language="javascript" type="text/javascript">
 
-var dropdown = document.getElementById("cat");
-function onCatChange() {
-	if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
-		location.href = "<?php echo get_option('home');?>/?cat="+dropdown.options[dropdown.selectedIndex].value;
-	}
-}
-dropdown.onchange = onCatChange;
+		var category_dropdown = document.getElementById("category");
+		function onCatChange() {
+			if ( category_dropdown.options[category_dropdown.selectedIndex].value > 0 ) {
+				location.href = "<?php echo get_option('home');?>/?cat="+category_dropdown.options[category_dropdown.selectedIndex].value;
+			}
+		}
+		category_dropdown.onchange = onCatChange;
+
+</script>
+
+<script language="javascript" type="text/javascript">
+
+		var tag_dropdown = document.getElementById("post_tag");
+		function onTagChange() {
+			if ( tag_dropdown.options[tag_dropdown.selectedIndex].value !== '-1' ) {
+				location.href = "<?php echo get_option('home');?>/?tag="+tag_dropdown.options[tag_dropdown.selectedIndex].value;
+			}
+		}
+		tag_dropdown.onchange = onTagChange;
 
 </script>
 

@@ -47,11 +47,44 @@
                     <?php wp_list_pages('title_li=&depth=1'); ?>
                 </ul>
             </div>
+
             <div class="categories">
                 <h3>Categories</h3>
-                <?php wp_dropdown_categories('show_option_none=Select Category'); ?>       
+                <?php 
+                    wp_dropdown_categories(array(
+                        'show_option_none' => 'Select category',
+                        'show_count'       => 1,
+                        'name'             => 'category',
+                        'taxonomy'         => 'category',
+                    )); 
+                ?>       
             </div>
-            
+
+            <div class="categories">
+                <h3>Tags</h3>
+                <?php 
+                    // wp_dropdown_categories(array(
+                    //     'show_option_none' => 'Select tag',
+                    //     'show_count'       => 1,
+                    //     'name'             => 'post_tag',
+                    //     'taxonomy'         => 'post_tag',
+                    // ));
+                ?>
+
+                <?php $tags = get_tags(); ?>
+
+                 <select id="post_tag" name="post_tag" class="postform">
+                    <option value="-1">Select tag</option>
+                    
+                    <?php foreach ( $tags as $tag ) : ?>
+                    
+                    <option class="level-0" value="<?php echo $tag->slug; ?>"><?php echo $tag->name; ?>&nbsp;&nbsp;(<?php echo $tag->count; ?>)</option>
+                    
+                    <?php endforeach; ?>
+                </select>
+
+            </div>
+
             <div class="categories">
                 
                 <h3>Archives</h3>
@@ -62,6 +95,6 @@
         </div>
         
     </div>
-    
+
     <div id="foliogrid"></div>
 	
