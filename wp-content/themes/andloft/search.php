@@ -16,7 +16,9 @@
 			
 					<div class="post-content">
 						<h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
-						<p><?php frog_the_excerpt_reloaded(20, 'none', TRUE, '...', FALSE, 1); ?></p>
+						<?php if ( show_chinese() ) : ?>
+                        <p><?php frog_the_excerpt_reloaded(20, 'none', TRUE, '...', FALSE, 1); ?></p>
+                        <?php endif ;?>
 					</div>
 			
 					<div class="post-footer">

@@ -63,4 +63,19 @@ function post_title_excerpt($post_title) {
 	return $post_title_excerpt;
 }
 
+function show_chinese() {
+
+	$boolean_result = false;
+
+	if ( isset($_SERVER) and !empty($_SERVER) ) {
+		$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 4); 
+
+		if ( preg_match("/zh-c/i", $lang) or preg_match("/zh/i", $lang) ) {
+			$boolean_result = true;
+		}
+	}
+
+	return $boolean_result;
+}
+
 ?>
